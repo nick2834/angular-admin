@@ -1,8 +1,6 @@
 $(function(){
     ////测试环境路径
-    loginBaseUrl = 'https://test.suber360.com';
-    //生产环境路径
-    // loginBaseUrl = 'https://www.suber360.com';
+    loginBaseUrl = ''
     (function() {
         var Storage = {
             AUTH: 'FLV-AUTH',
