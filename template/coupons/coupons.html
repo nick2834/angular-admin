@@ -1,0 +1,48 @@
+<nav class="breadcrumb ng-scope">
+    <i class="Hui-iconfont"></i> <a ui-sref="home">首页</a> <span class="c-gray en">>{{title}}
+    <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href='javascript:location.reload()' title="刷新">
+    <i class="Hui-iconfont"></i></a>
+</nav>
+<article class="page-container">
+    <div class="commonIit">财务统计报表</div>
+    <search-con2></search-con2>
+    <div class="tableCon" id="tableScroll" style="overflow: hidden;">
+        <table class="tableMain" cellpadding="0" cellspacing="0" width="100%" >
+            <tr>
+                <th width="5%">日期</th>
+                <th width="5%">所有用户余额</th>
+                <th width="5%">所有用户充值金额</th>
+                <th width="5%">当日提现数量</th>
+                <th width="5%">当日提现金额</th>
+                <th width="5%">发布任务总金额</th>
+                <th width="5%">完成任务总金额</th>
+                <th width="5%">累计提现数量</th>
+                <th width="5%">累计提现金额</th>
+                <th width="5%">领取红包个数</th>
+                <th width="5%">领取红包总金额</th>
+                <th width="5%">使用红包个数</th>
+                <th width="5%">使用红包总金额</th>
+                <th width="5%">领取现金次数</th>
+                <th width="5%">领取现金总金额</th>
+            </tr>
+            <tr ng-repeat="topicList in balance" repeat-done="">
+                <td>{{topicList.date}}</td>
+                <td><a ui-sref="accoutList">{{topicList.price}}</a></td>
+                <td>{{topicList.price}}</td>
+                <td><a ui-sref="withDrawCtrl">{{withdraw_success_daily[$index].number}}</a></td>
+                <td><a ui-sref="withDrawCtrl">{{withdraw_success_daily[$index].price}}</a></td>
+                <td>{{create_task[$index].price}}</td>
+                <td>{{done_task[$index].price}}</td>
+                <td>{{withdraw_success_total[$index].number}}</td>
+                <td>{{withdraw_success_total[$index].price}}</td>
+                <td>{{couponsCon[$index].number}}</td>
+                <td>{{couponsCon[$index].price}}</td>
+                <td>{{used_coupon[$index].number}}</td>
+                <td>{{used_coupon[$index].price}}</td>
+                <td>{{payment[$index].number}}</td>
+                <td>{{payment[$index].price}}</td>
+            </tr>
+        </table>
+    </div>
+    <page-con></page-con>
+</article>

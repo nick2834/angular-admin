@@ -1,0 +1,79 @@
+<nav class="breadcrumb ng-scope">
+    <i class="Hui-iconfont"></i> <a ui-sref="home">首页</a><span class="c-gray en">&gt;</span> {{title}} <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href='javascript:location.reload()' title="刷新">
+    <i class="Hui-iconfont"></i></a>
+</nav>
+<article class="page-container">
+<div class="commonIit"><export-excel></export-excel>任务列表</div>
+<div class="searchLine">
+    <input type="date" placeholder="开始时间" name="start_time" class="marginI">
+    <input type="date" placeholder="结束时间" name="end_time">
+    <button class="searchBrn" ng-click="search()">搜索</button>
+    <div class="clear"></div>
+    <div class="conditionLine">
+        <input type="text" name="task_id" placeholder="任务ID" class="marginI"><input type="text" name="name" placeholder="任务名">
+    </div>
+    <div class="conditionLine"><input type="text" name="status" placeholder="任务状态" class="marginI"><input type="text" name="checked" placeholder="是否被举报:true/false"></div>
+    <div class="conditionLine"><input type="text" name="owner_id" placeholder="发布人id" class="marginI"><input type="text" name="employee_id" placeholder="接单人id"></div>
+
+</div>
+<div class="tableCon" id="tableScroll" style="overflow: hidden;">
+    <table class="tableMain noneOverflow" cellpadding="0" cellspacing="0" width="200%" >
+        <tr>
+            <th width="5%">日期</th>
+            <th width="5%">任务名</th>
+            <th width="5%">任务ID</th>
+            <th width="5%">操作</th>
+
+            <th width="5%">举报人id</th>
+            <th width="5%">举报原因</th>
+
+            <th width="5%">发布人ID</th>
+            <th width="5%">发布人</th>
+
+            <th width="5%">接单人ID</th>
+            <th width="5%">接单人</th>
+
+            <th width="5%">任务分类</th>
+            <th width="5%">类型</th>
+            <th width="5%">状态</th>
+
+            <th width="5%">金钱</th>
+            <th width="5%">接单时间</th>
+            <th width="5%">评论数</th>
+        </tr>
+        <tr ng-repeat="topicList in withdrawList" repeat-done="">
+            <td>{{topicList.created_at | data2 }}</td>
+            <td>{{topicList.name }}</td>
+            <td>{{topicList.id }}</td>
+            <td>
+               <span ng-switch="topicList.check">
+                   <span ng-switch-when="true"><a href="javascript:;" ng-click="taskCheck('pass',topicList.id)">通过</a> | <a href="javascript:;" ng-click="taskCheck('deny',topicList.id)">不通过</a></span>
+                   <span ng-switch-when="false" ng-click="operateEvent(topicList.id)">{{ {true:'取消推荐',false:'置顶'}[topicList.recommend] }}</span>
+               </span>
+                <span ng-if=" topicList.status == 'paid'" class="eventColor" ng-click="doneEvent(topicList.id)">确认完成</span>
+                <span ng-if=" topicList.status == 'refund_confirming'" class="eventColor" ng-click="doneEvent(topicList.id)">确认完成</span>
+            </td>
+
+            <td><a href="#/userData/{{topicList.reporter}}">{{topicList.reporter}}</a></td>
+            <td>{{topicList.reason | report }}</td>
+
+            <td><a href="#/userData/{{topicList.owner.id}}">{{topicList.owner.id }}</a></td>
+            <td>{{topicList.owner.nickname }}</td>
+
+            <td><a href="#/userData/{{topicList.employee.id}}">{{topicList.employee.id }}</a></td>
+            <td>{{topicList.employee.nickname }}</td>
+
+            <td>{{topicList.task_type }}</td>
+            <td>{{topicList.task_cat.name }}</td>
+
+            <td>{{topicList.status }}</td>
+
+            <td>{{topicList.price }}</td>
+            <td>{{topicList.seize_timestamp | data2 }}</td>
+
+            <td>{{topicList.task_comment_count }}</td>
+        </tr>
+    </table>
+</div>
+<page-con></page-con>
+</article>

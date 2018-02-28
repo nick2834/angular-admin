@@ -1,0 +1,105 @@
+<style>
+    .row{
+        margin-bottom: 20px;
+    }
+</style>
+<nav class="breadcrumb ng-scope">
+    <i class="Hui-iconfont"></i> <a ui-sref="home">首页</a> <span class="c-gray en">>角色列表
+    <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href='javascript:location.reload()' title="刷新">
+    <i class="Hui-iconfont"></i></a>
+</nav>
+<article class="page-container">
+    <div style="margin-top: 10px;">
+        <div class="cl pd-5 bg-1 bk-gray">
+            <span class="l">
+                <a class="btn btn-primary radius" href="javascript:;" ng-click="addUser()"><i class="Hui-iconfont">&#xe600;</i> 添加角色</a>
+            </span>
+            <span class="r">共有数据：<strong>{{roleCon.length}}</strong> 条</span>
+        </div>
+        <div class="tableCon">
+            <table class="table table-border table-bordered table-hover table-bg" cellpadding="0" cellspacing="0" width="100%">
+                <tr>
+                    <th scope="col" colspan="6">角色管理</th>
+                </tr>
+                <tr class="text-c">
+                    <th width="5%">id</th>
+                    <th width="30%">角色名</th>
+                    <th width="40%">描述</th>
+                    <th width="20%">操作</th>
+                </tr>
+                <tr ng-repeat="x in roleCon|filter:id" repeat-done="" class="text-c">
+                    <td>{{x.id}}</td>
+                    <td class="alignL">{{x.name}}</td>
+                    <td class="alignL">{{x.description}}</td>
+                    <td class="alignL" ng-if="editUser">
+                        <a title="查看" href="#/roleDetail/{{x.id}}" style="text-decoration:none">查看</a>
+                        <a title="编辑" ng-click="editUser(x)" style="text-decoration:none" class="ml-5">修改</a>
+                        <a title="删除" href="javascript:;" ng-click="deleteR(x.id)" class="ml-5" style="text-decoration:none">删除</a>
+                    </td>
+                    <td ng-if="!editUser">
+                        无权限操作
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</article>
+<div id="addUser" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content radius">
+            <div class="modal-header">
+                <h3 class="modal-title">添加角色</h3>
+                <a class="close" data-dismiss="modal" aria-hidden="true" href="javascript:void(0);">×</a>
+            </div>
+            <div class="modal-body">
+                <div class="row cl">
+                    <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>角色名字：</label>
+                    <div class="formControls col-xs-8 col-sm-9">
+                        <input type="text" class="input-text ng-pristine ng-untouched ng-valid ng-not-empty" placeholder="请输入。。。" name="uName" value="{{role.name}}">
+                    </div>
+                </div>
+                <div class="row cl">
+                    <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>角色描述：</label>
+                    <div class="formControls col-xs-8 col-sm-9">
+                        <textarea class="input-text" placeholder="角色描述" name="uDes" resize="none">{{role.description}}</textarea>
+                    </div>
+                </div>
+                <div class="row cl">
+                    <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+                        <button class="btn btn-primary createBtn" ng-click="createUser()">创建</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="editUser" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content radius">
+            <div class="modal-header">
+                <h3 class="modal-title">修改角色</h3>
+                <a class="close" data-dismiss="modal" aria-hidden="true" href="javascript:void(0);">×</a>
+            </div>
+            <div class="modal-body">
+                <div class="row cl">
+                    <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>角色名字：</label>
+                    <div class="formControls col-xs-8 col-sm-9">
+                        <input type="text" class="input-text ng-pristine ng-untouched ng-valid ng-not-empty" placeholder="请输入。。。" name="uNames" ng-model="roleUser.name">
+                    </div>
+                </div>
+                <div class="row cl">
+                    <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>角色描述：</label>
+                    <div class="formControls col-xs-8 col-sm-9">
+                        <textarea class="input-text" placeholder="角色描述" name="uDess" ng-model="roleUser.description"></textarea>
+                    </div>
+                </div>
+                <div class="row cl">
+                    <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+                        <button class="btn btn-primary createBtn" ng-click="editUsers()">修改</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

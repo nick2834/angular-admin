@@ -1,0 +1,45 @@
+<nav class="breadcrumb ng-scope">
+    <i class="Hui-iconfont"></i> <a ui-sref="home">首页</a><span class="c-gray en">&gt;</span> <a ui-sref="bettingList">竞猜列表</a><span class="c-gray en">&gt;</span> {{bettingInfoTitle.name}} <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href='javascript:location.reload()' title="刷新">
+    <i class="Hui-iconfont"></i></a>
+</nav>
+<article class="page-container">
+<export-excel id="excel-exprot"></export-excel>
+<div class="pt-20 pb-20 f-20 text-c">
+    <span>
+        <span ng-bind="bettingInfoTitle.match_start_time | data2" class="ng-binding"></span>
+        <span ng-bind="bettingInfoTitle.name" class="ng-binding"></span>
+    </span>
+    <p>投注总金额:<strong>{{allAmount}}</strong></p>
+</div>
+<table class="table table-border table-bordered table-bg table-hover table-sort" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
+    <thead>
+        <tr class="text-c" role="row">
+            <th width="80" tabindex="0" rowspan="1" colspan="1" style="width: 150px;">投注时间</th>
+            <th width="100" tabindex="0" rowspan="1" colspan="1" style="width: 200px;">A队</th>
+            <th width="100" tabindex="0" rowspan="1" colspan="1" style="width: 200px;">B队</th>
+            <th tabindex="0" rowspan="1" colspan="1"  style="width: 100px;">用户ID</th>
+            <th width="150" tabindex="0" rowspan="1" colspan="1" style="width: 149px;">姓名</th>
+            <th width="150" tabindex="0" rowspan="1" colspan="1" style="width: 149px;">手机号</th>
+            <th width="60" tabindex="0"  rowspan="1" colspan="1" style="width: 60px;">投注</th>
+            <th width="100" rowspan="1" colspan="1" style="width: 100px;">金额</th>
+            <th width="100" rowspan="1" colspan="1" style="width: 100px;">结算结果</th>
+            <th width="100" rowspan="1" colspan="1" style="width: 100px;">收益</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="text-c odd" role="row" ng-repeat="todo in bettingInfo">
+            <td class="sorting_1">{{todo.created_at | data2}}</td>
+            <td>{{todo.group_a}}</td>
+            <td>{{todo.group_b}}</td>
+            <td class="text-c">{{todo.user.id}}</td>
+            <td class="text-c"><a class="dropDown_A" ui-sref="userBetInfo({id:todo.user.id})">{{todo.user.nickname}}</a></td>
+            <td>{{todo.user.phone}}</td>
+            <td>{{todo.target | betStatus}}</td>
+            <td>{{todo.amount}}</td>
+            <td>{{todo.result | bet_result}}</td>
+            <td>{{todo.gain}}</td>
+        </tr>
+    </tbody>
+</table>
+</article>
+

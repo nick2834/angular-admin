@@ -1,0 +1,32 @@
+<nav class="breadcrumb ng-scope">
+    <i class="Hui-iconfont"></i> <a ui-sref="home">首页</a> <span class="c-gray en">><a ui-sref="shopList">积分商城</a> <span class="c-gray en">>积分兑换详情
+    <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href='javascript:location.reload()' title="刷新">
+    <i class="Hui-iconfont"></i></a>
+</nav>
+<article class="page-container">
+<div class="commonIit">积分兑换详情
+    <!--<export-excel></export-excel>-->
+</div>
+<search-con2></search-con2>
+<div class="tableCon" id="tableScroll" style="overflow: hidden;">
+    <table class="tableMain" cellpadding="0" cellspacing="0" width="100%" >
+        <tr>
+            <th width="10%">兑换时间</th>
+            <th width="10%">id</th>
+            <th width="10%">用户ID</th>
+            <th width="10%">兑换数量</th>
+            <th width="10%">支付方式</th>
+            <th width="10%">兑换商品名</th>
+        </tr>
+        <tr ng-repeat="list in records" repeat-done="">
+            <td>{{list.created_at | data}}</td>
+            <td>{{list.id}}</td>
+            <td><a ng-href="#/userDatas/{{list.user_id}}">{{list.user_id}}</a></td>
+            <td>{{list.purchase_count}}</td>
+            <td>{{list.pay_type | purchase}}</td>
+            <td>{{list.product.name}}</td>
+        </tr>
+    </table>
+</div>
+<page-con></page-con>
+</article>

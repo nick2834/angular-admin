@@ -1,0 +1,43 @@
+<nav class="breadcrumb ng-scope">
+    <i class="Hui-iconfont"></i> <a ui-sref="home">首页</a> <span class="c-gray en">>保证金管理
+    <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href='javascript:location.reload()' title="刷新">
+    <i class="Hui-iconfont"></i></a>
+</nav>
+<article class="page-container">
+    <div class="commonIit"><export-excel></export-excel>保证金</div>
+    <div class="searchLine">
+        <input type="date" placeholder="开始时间" name="bgnT" class="marginI">
+        <input type="date" placeholder="结束时间" name="endT">
+        <input type="text" placeholder="owner_id" class="marginI" name="owner_id">
+        <button class="searchBrn" ng-click="search2()">搜索</button>
+        <div class="clear"></div>
+
+    </div>
+    <div class="clear"></div>
+    <div class="line-3">
+        <p>锁定保证金：{{payment.lock}}</p>
+        <p>解锁保证金：{{payment.unlock}}</p>
+        <p>扣除保证金：{{payment.cut}}</p>
+    </div>
+    <div class="tableCon">
+        <table class="tableMain" cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+                <th width="10%">id</th>
+                <th width="40%">任务名</th>
+                <th width="10%">发布人id</th>
+                <th width="10%">锁定保证金</th>
+                <th width="10%">解锁保证金</th>
+                <th width="10%">扣除保证金</th>
+            </tr>
+            <tr ng-repeat="topicList in topicCon" repeat-done="">
+                <td>{{topicList.id}}</td>
+                <td>{{topicList.name}}</td>
+                <td>{{topicList.owner.id}}</td>
+                <td>{{topicList.lock_deposit}}</td>
+                <td>{{topicList.unlock_deposit}}</td>
+                <td>{{topicList.cut_deposit}}</td>
+            </tr>
+        </table>
+        <page-con></page-con>
+    </div>
+</article>

@@ -1,0 +1,208 @@
+<nav class="breadcrumb ng-scope">
+    <i class="Hui-iconfont"></i> <a ui-sref="home">首页</a> <span class="c-gray en">>积分商城
+    <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href='javascript:location.reload()' title="刷新">
+    <i class="Hui-iconfont"></i></a>
+</nav>
+<article class="cl pd-20">
+    <div class="cl pd-5 bg-1 bk-gray mt-20">
+        <span class="l">
+            <a href="javascript:;" ng-click="create()" class="btn btn-primary radius">
+                <i class="Hui-iconfont Hui-iconfont-add"></i> 增加商品
+            </a>
+        </span>
+        <span class="r">共有商品：<strong>{{shopCon.length}}</strong> 条</span>
+    </div>
+    <div class="mt-10">
+        <table class="table table-border table-bordered table-bg table-hover table-sort" width="100%">
+            <thead>
+            <tr class="text-c">
+                <th width="40">ID</th>
+                <th width="100">产品名称</th>
+                <th width="100">描述</th>
+                <th width="100">积分</th>
+                <th width="100">上架时间</th>
+                <th width="100">下线时间</th>
+                <th width="100">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="text-c va-m" ng-repeat="shopList in shopCon">
+                <td>{{shopList.id}}</td>
+                <td>{{shopList.name}}</td>
+                <td>{{shopList.description}}</td>
+                <td><span class="price">{{shopList.pay_point}}</span> 积分</td>
+                <td>{{shopList.on_time | data2}}</td>
+                <td>{{shopList.off_time | data2}}</td>
+                <td class="td-manage">
+                    <a style="text-decoration:none" class="ml-5" ng-click="product_edit(shopList)" href="javascript:;" title="编辑"><i class="Hui-iconfont Hui-iconfont-edit">编辑</i></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</article>
+<div id="modal-shops" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content radius">
+            <div class="modal-header">
+                <h5 class="modal-title" style="text-align: center">增加商品</h5>
+                <a class="close" data-dismiss="modal" aria-hidden="true" href="javascript:void(0);">×</a>
+            </div>
+            <div class="modal-body">
+                <div class="row cl fileCon2">
+                    <label class="form-label col-xs-3 col-sm-3">商品名称：</label>
+                    <div class="formControls col-xs-9 col-sm-9">
+                        <input class="input-text radius" type="text" placeholder="商品名称" id="title"/>
+                    </div>
+                </div>
+                <div class="row cl fileCon2">
+                    <label class="form-label col-xs-3 col-sm-3">商品描述：</label>
+                    <div class="formControls col-xs-9 col-sm-9">
+                        <input class="input-text radius" type="text" placeholder="商品描述" id="des"/>
+                    </div>
+                </div>
+                <div class="row cl fileCon2">
+                    <label class="form-label col-xs-3 col-sm-3">商品类型：</label>
+                    <div class="formControls col-xs-9 col-sm-9 product_type dropDown dropdown-toggle">
+                        <input type="text" class="input-text radius cash dropDown_A" data-toggle="dropdown" aria-haspopup="true" name="cash" aria-expanded="false" value="cash">
+                        <ul class="dropDown-menu menu radius box-shadow">
+                            <li><a href="javascript:void (0);">cash</a></li>
+                            <li><a href="javascript:void (0);">rose</a></li>
+                            <li><a href="javascript:void (0);">diamond</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row cl fileCon2">
+                    <label class="form-label col-xs-3 col-sm-3">商品价格：</label>
+                    <div class="formControls col-xs-9 col-sm-9">
+                        <input class="input-text radius" type="text" placeholder="商品价格" id="product_price"/>
+                    </div>
+                </div>
+                <div class="row cl fileCon2" style="position: relative">
+                    <label class="form-label col-xs-3 col-sm-3">图片地址：</label>
+                    <form method="post" enctype="multipart/form-data"  class="formControls col-xs-9 col-sm-9">
+                        <input type="file" name="imgfile" style="width: 35%;height: 35px;top: 0;">
+                        <input type="text" class="fileI" placeholder="商品图" id="image_url" name="banner" />
+                        <button class="fileBtn" style="margin-left: 1%;width: 35%">选取图片</button>
+                    </form>
+                </div>
+                <div class="row cl fileCon2">
+                    <label class="form-label col-xs-3 col-sm-3">支付类型：</label>
+                    <div class="formControls col-xs-9 col-sm-9 pay_type dropDown dropdown-toggle">
+                        <select id="getType" ng-model="selectValue" class='pushI' style="height: 36px" ng-change="selectedChange(selectValue)">
+                            <option value="point">point</option>
+                            <option value="rose">rose</option>
+                            <option value="diamond">diamond</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row cl fileCon2 pay_point">
+                    <label class="form-label col-xs-3 col-sm-3">需支付积分：</label>
+                    <div class="formControls col-xs-9 col-sm-9">
+                        <input class="input-text radius" type="text" placeholder="需支付积分" id="pay_point"/>
+                    </div>
+                </div>
+                <div class="row cl fileCon2 pay_mount" style="display: none">
+                    <label class="form-label col-xs-3 col-sm-3">需消耗数量：</label>
+                    <div class="formControls col-xs-9 col-sm-9">
+                        <input class="input-text radius" type="text" placeholder="需消耗数量" id="pay_mounts" name="pay_amount"/>
+                    </div>
+                </div>
+                <div class="row cl fileCon2">
+                    <label class="form-label col-xs-3 col-sm-3">上架时间：</label>
+                    <div class="formControls col-xs-9 col-sm-9">
+                        <input class="input-text radius" type="date" placeholder="上架时间" id="on_time"/>
+                    </div>
+                </div>
+                <div class="row cl fileCon2">
+                    <label class="form-label col-xs-3 col-sm-3">下架时间：</label>
+                    <div class="formControls col-xs-9 col-sm-9">
+                        <input class="input-text radius" type="date" placeholder="下架时间" id="off_time"/>
+                    </div>
+                </div>
+                <button class="btn btn-success radius createShops" style="display:block;width: 30%;margin: 20px auto 0" ng-click="createShops()">提交</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modal-shops-edit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content radius">
+            <div class="modal-header">
+                <h5 class="modal-title" style="text-align: center">编辑商品</h5>
+                <a class="close" data-dismiss="modal" aria-hidden="true" href="javascript:void(0);">×</a>
+            </div>
+            <div class="modal-body">
+                <div class="row cl fileCon2">
+                    <label class="form-label col-xs-3 col-sm-3">商品名称：</label>
+                    <div class="formControls col-xs-9 col-sm-9">
+                        <input class="input-text radius" type="text" placeholder="请输入商品名称" name="title" ng-model="shopsInfo.name"/>
+                    </div>
+                </div>
+                <div class="row cl fileCon2">
+                    <label class="form-label col-xs-3 col-sm-3">商品描述：</label>
+                    <div class="formControls col-xs-9 col-sm-9">
+                        <input class="input-text radius" type="text" placeholder="请输入商品描述" name="des" ng-model="shopsInfo.description"/>
+                    </div>
+                </div>
+                <div class="row cl fileCon2 ">
+                    <label class="form-label col-xs-3 col-sm-3">商品类型：</label>
+                    <div class="formControls col-xs-9 col-sm-9 product_type dropDown dropdown-toggle">
+                        <input type="text" class="input-text radius cash dropDown_A" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" name="cahs2" ng-model="shopsInfo.product_type">
+                        <ul class="dropDown-menu menu radius box-shadow">
+                            <li><a href="javascript:void (0);">cash</a></li>
+                            <li><a href="javascript:void (0);">cash1</a></li>
+                            <li><a href="javascript:void (0);">cash2</a></li>
+                            <li><a href="javascript:void (0);">cash3</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row cl fileCon2">
+                    <label class="form-label col-xs-3 col-sm-3">商品价格：</label>
+                    <div class="formControls col-xs-9 col-sm-9">
+                        <input class="input-text radius" type="text" placeholder="商品价格" name="product_price" ng-model="shopsInfo.product_price"/>
+                    </div>
+                </div>
+                <div class="row cl fileCon2" style="position: relative">
+                    <label class="form-label col-xs-3 col-sm-3">图片地址：</label>
+                    <form method="post" enctype="multipart/form-data"  class="formControls col-xs-9 col-sm-9">
+                        <input type="file" name="imgfile" style="width: 35%;height: 35px;top: 0;">
+                        <input type="text" class="fileI" placeholder="商品图" name="banner" ng-model="shopsInfo.image_url" />
+                        <button class="fileBtn" style="margin-left: 1%;width: 35%">选取图片</button>
+                    </form>
+                </div>
+                <div class="row cl fileCon2">
+                    <label class="form-label col-xs-3 col-sm-3">支付类型：</label>
+                    <div class="formControls col-xs-9 col-sm-9 pay_type dropDown dropdown-toggle">
+                        <input type="text" class="input-text radius point dropDown_A" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" name="point2" ng-model="shopsInfo.pay_type">
+                    </div>
+                </div>
+                <div class="row cl fileCon2" ng-if="shopsInfo.pay_type=='point'">
+                    <label class="form-label col-xs-3 col-sm-3">需支付积分：</label>
+                    <div class="formControls col-xs-9 col-sm-9">
+                        <input class="input-text radius" type="text" placeholder="需支付积分" name="pay_point" ng-model="shopsInfo.pay_point"/>
+                    </div>
+                </div>
+                <div class="row cl fileCon2 pay_mount" ng-if="shopsInfo.pay_type=='rose'||shopsInfo.pay_type=='diamond'">
+                    <label class="form-label col-xs-3 col-sm-3">需消耗数量：</label>
+                    <div class="formControls col-xs-9 col-sm-9">
+                        <input class="input-text radius" type="text" placeholder="需消耗数量" id="pay_mount" name="pay_amount" ng-model="shopsInfo.pay_amount"/>
+                    </div>
+                </div>
+                <div class="row cl fileCon2">
+                    <label class="form-label col-xs-3 col-sm-3">上架时间：</label>
+                    <div class="formControls col-xs-9 col-sm-9">
+                        <input class="input-text radius" type="date" placeholder="上架时间" name="on_time" ng-model="shopsInfo.on_time"/>
+                    </div>
+                </div>
+                <div class="row cl fileCon2">
+                    <label class="form-label col-xs-3 col-sm-3">下架时间：</label>
+                    <div class="formControls col-xs-9 col-sm-9">
+                        <input class="input-text radius" type="date" placeholder="下架时间" name="off_time" ng-model="shopsInfo.off_time"/>
+                    </div>
+                </div>
+                <button class="btn btn-success radius editShops" style="display:block;width: 30%;margin: 20px auto 0" ng-click="editShops()">提交</button>
+            </div>
+        </div>
+    </div>
+</div>

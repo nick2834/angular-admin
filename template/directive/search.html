@@ -1,0 +1,11 @@
+<div class="searchLine">
+    <div class="addCon">
+        <i class="icon-plus addIcon"></i>
+        <ul class="addList">
+            <li ng-repeat="x in conditions" ng-click="addInput(x)"><a href="JavaScript:void(0);">{{x}}</a></li>
+        </ul>
+    </div>
+    <input type="text" placeholder="请输入id" name="user_id"><button class="searchBrn" ng-click="search()">搜索</button>
+    <div class="clear"></div>
+</div>
+<div class="clear"></div>

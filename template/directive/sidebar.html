@@ -1,0 +1,102 @@
+<div class="sideBar">
+    <aside class="Hui-aside">
+        <input runat="server" id="divScrollValue" type="hidden" value="" />
+        <div class="menu_dropdown bk_2 menu_sidebar">
+            <dl id="menu-member">
+                <dt><i class="Hui-iconfont">&#xe60d;</i> 会员管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+                <dd>
+                    <ul>
+                        <li><a ui-sref="userList" data-title="会员列表" href="javascript:;">会员列表</a></li>
+                        <li><a ui-sref="newUser" data-title="注册量" href="javascript:;">注册量</a></li>
+                        <li><a class="siderbar_menu" href="javascript:;" data-title="黑名单管理">黑名单管理<i class="Hui-iconfont menu_dropdown-arrow" style="position: absolute;overflow: hidden;top: 0;right: 15px;">&#xe6d5;</i></a>
+                            <ul class="side_menu" style="display: none">
+                                <li><a ui-sref="blacklist" data-title="黑名单列表">黑名单列表</a></li>
+                                <li><a ui-sref="blackRules" data-title="黑名单规则">黑名单规则</a></li>
+                            </ul>
+                        </li>
+                        <li><a ui-sref="internal" data-title="会员列表" href="javascript:;">内部用户统计</a></li>
+                        <li><a ui-sref="errorInfo" data-title="错误数据管理" href="javascript:;">错误数据管理</a></li>
+                    </ul>
+                </dd>
+            </dl>
+            <dl id="menu-article">
+                <dt><i class="Hui-iconfont">&#xe616;</i> 内容管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+                <dd>
+                    <ul>
+                        <li><a ui-sref="topic" data-title="话题管理" >话题管理</a></li>
+                        <li><a ui-sref="taskList" data-title="任务管理" >任务管理</a></li>
+                        <li><a ui-sref="cardList" data-title="卡片管理" >卡片管理</a></li>
+                        <li><a ui-sref="comment" data-title="评论管理" >评论管理</a></li>
+                        <li><a ui-sref="margin" data-title="保证金管理" >保证金管理</a></li>
+                        <li><a class="siderbar_menu" href="javascript:;" data-title="活动数据统计" >活动数据统计<i class="Hui-iconfont menu_dropdown-arrow" style="position: absolute;overflow: hidden;top: 0;right: 15px;">&#xe6d5;</i></a>
+                            <ul class="side_menu" style="display: none">
+                                <li><a ui-sref="checkIn" data-title="签到数据" >签到数据</a></li>
+                                <li><a ui-sref="luckyDraw" data-title="抽奖数据" >抽奖数据</a></li>
+                                <li><a ui-sref="pandaLucky" data-title="星座联萌" >星座联萌</a></li>
+                            </ul>
+                        </li>
+                        <li><a class="siderbar_menu" href="javascript:;" data-title="积分管理" >积分管理<i class="Hui-iconfont menu_dropdown-arrow" style="position: absolute;overflow: hidden;top: 0;right: 15px;">&#xe6d5;</i></a>
+                            <ul class="side_menu" style="display: none">
+                                <li><a ui-sref="shopList" data-title="积分商城" >积分商城</a></li>
+                                <li><a ui-sref="exchange" data-title="积分兑换记录" >积分兑换记录</a></li>
+                            </ul>
+                        </li>
+                        <li><a class="siderbar_menu" href="javascript:;" data-title="竞猜管理">竞猜管理<i class="Hui-iconfont menu_dropdown-arrow" style="position: absolute;overflow: hidden;top: 0;right: 15px;">&#xe6d5;</i></a>
+                            <ul class="side_menu" style="display: none">
+                                <li><a ui-sref="bettingList" data-title="竞猜列表">竞猜列表</a></li>
+                                <li><a ui-sref="createBet" data-title="创建竞猜">创建竞猜</a></li>
+                                <li><a ui-sref="userBetList" data-title="用户竞猜列表">用户竞猜列表</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </dd>
+            </dl>
+            <dl id="menu-picture">
+                <dt><i class="Hui-iconfont Hui-iconfont-tongji-xian"></i> 财务管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+                <dd>
+                    <ul>
+                        <li><a ui-sref="coupons" data-title="财务统计" href="javascript:void(0)">财务统计</a></li>
+                        <li><a ui-sref="withDrawCtrl" data-title="提现明细" href="javascript:void(0)">提现明细</a></li>
+                        <li><a ui-sref="accoutList" data-title="用户余额排序" href="javascript:void(0)">用户余额排序</a></li>
+                    </ul>
+                </dd>
+            </dl>
+            <dl id="menu-product">
+                <dt><i class="Hui-iconfont Hui-iconfont-manage"></i> 管理员管理<i class="Hui-iconfont  menu_dropdown-arrow">&#xe6d5;</i></dt>
+                <dd>
+                    <ul>
+                        <li><a ui-sref="roleList" data-title="角色管理" href="javascript:void(0)">角色管理</a></li>
+                        <li><a ui-sref="limitList" data-title="权限管理" href="javascript:void(0)">权限管理</a></li>
+                        <li><a ui-sref="adminList" data-title="管理员列表" href="javascript:void(0)">管理员列表</a></li>
+                        <li><a _href="product-list.html" data-title="日志管理" href="javascript:void(0)">日志管理</a></li>
+                    </ul>
+                </dd>
+            </dl>
+            <dl id="menu-comments">
+                <dt><i class="Hui-iconfont">&#xe622;</i> 消息管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+                <dd>
+                    <ul>
+                        <li><a ui-sref="AppPush" data-title="APP消息推送" href="javascript:;">APP消息推送</a></li>
+                        <li><a ui-sref="feedback" data-title="用户反馈" href="javascript:;">用户反馈</a></li>
+                    </ul>
+                </dd>
+            </dl>
+
+            <dl id="menu-admin">
+                <dt><i class="Hui-iconfont">&#xe62d;</i> 运营管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+                <dd>
+                    <ul>
+                        <li><a _href="admin-role.html" data-title="运营用户管理" href="javascript:void(0)">运营用户管理</a></li>
+                        <li><a _href="admin-permission.html" data-title="内容审核" href="javascript:void(0)">内容审核</a></li>
+                        <li><a _href="admin-list.html" data-title="运营活动" href="javascript:void(0)">运营活动</a></li>
+                        <li><a _href="admin-list.html" data-title="网站运营统计" href="javascript:void(0)">网站运营统计</a></li>
+                    </ul>
+                </dd>
+            </dl>
+            <!--<dl id="system-admin">-->
+                <!--<dt><i class="Hui-iconfont Hui-iconfont-manage2"></i><a ui-sref="setting" data-title="后台设置" href="javascript:void(0)" style="text-decoration: none"> 后台设置</a></dt>-->
+            <!--</dl>-->
+        </div>
+    </aside>
+    <div class="dislpayArrow hidden-xs"><a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a></div>
+</div>

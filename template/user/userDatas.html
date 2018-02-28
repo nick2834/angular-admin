@@ -1,0 +1,54 @@
+<nav class="breadcrumb ng-scope">
+    <i class="Hui-iconfont"></i> <a ui-sref="home">首页</a> <span class="c-gray en">&gt;</span> <a ui-sref="bettingList">竞猜列表</a><span class="c-gray en">&gt;</span>用户资金收支明细
+    <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href='javascript:location.reload()' title="刷新">
+    <i class="Hui-iconfont"></i></a>
+</nav>
+<article class="page-container">
+    <div class="commonIit">用户基本信息</div>
+    <div class="tableCon">
+        <table class="tableMain" cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+                <th width="5%">用户ID</th>
+                <th width="10%">用户名</th>
+                <th width="10%">注册时间</th>
+                <th width="10%">昵称</th>
+                <th width="5%">内部用户</th>
+                <th width="10%">电话</th>
+                <th width="5%">性别</th>
+                <th width="5%">积分</th>
+                <th width="5%">账户余额</th>
+                <th width="5%">邀请收益</th>
+            </tr>
+            <tr>
+                <td>{{userCon.id}}</td>
+                <td>{{userCon.name}}</td>
+                <td>{{userCon.created_at | data}}</td>
+                <td>{{userCon.nickname}}</td>
+                <td>{{userCon.internal | internal}}</td>
+                <td>{{userCon.phone}}</td>
+                <td>{{userCon.gender | gender}}</td>
+                <td>{{userCon.credit}}</td>
+                <td>{{userCon.wallet.balance }}</td>
+                <td>{{userCon.invite_gain}}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="commonIit">
+        <export-excel></export-excel>
+    收支明细</div>
+    <div class="tableCon">
+        <table class="tableMain" cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+                <th width="5%">来源</th>
+                <th width="5%">时间</th>
+                <th width="5%">金额</th>
+            </tr>
+            <tr ng-repeat="topicList in balanceListCon" repeat-done="">
+                <td>{{topicList.payment_name}}</td>
+                <td>{{topicList.created_at * 1000 | data2}}</td>
+                <td>{{topicList.cash_flow | flow2}}{{topicList.amount}}</td>
+            </tr>
+        </table>
+    </div>
+    <page-con2></page-con2>
+</article>

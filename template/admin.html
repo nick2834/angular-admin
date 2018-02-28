@@ -1,0 +1,56 @@
+﻿<div class="allCon">
+	<div class="commonIit"><i class="Hui-iconfont Hui-iconfont-home fontBig"></i> 速帮360运营平台</div>
+
+	<div id="tab_demo" class="HuiTab conA">
+		<div class="tabBar clearfix">
+			<span>任务情况日变化</span>
+			<span>任务情况月变化</span>
+		</div>
+		<div class="tabCon"><div id="mission2" class="clearfix"></div>
+		</div>
+		<div class="tabCon"><div id="mission1" class="clearfix"></div></div>
+	</div>
+	<div id="taskCount" class="conA" style="height: 400px;">
+		<table class="tableMain" cellpadding="0" cellspacing="0" width="100%">
+			<thead>
+			<tr>
+				<th>日期</th>
+				<th>用户注册</th>
+				<th>留存</th>
+				<th>日活跃</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr ng-repeat="creat in sendArrayConNum" repeat-done="">
+				<td>{{creat.date}}</td>
+				<td>{{creat.number}}</td>
+				<td>{{saveList[$index].one_day_percent}}</td>
+				<td>{{dayLiveArray[$index].number}}</td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+	<div id="price" class="conA"></div>
+	<div id="water" class="conA" style="height: 400px;">
+		<table class="tableMain" cellpadding="0" cellspacing="0" width="100%">
+			<thead>
+			<tr>
+				<th>日期</th>
+				<th>充值</th>
+				<th>提现</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr ng-repeat="recharge in recharge" repeat-done="">
+				<td>{{recharge.date}}</td>
+				<td>{{recharge.price}}</td>
+				<td>{{withDrawArray[$index].price}}</td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<script>
+    $(function(){
+        $.Huitab("#tab_demo .tabBar span","#tab_demo .tabCon","current","click","0")});
+</script>

@@ -1,0 +1,143 @@
+<style>
+    .row{
+        margin-bottom: 20px;
+    }
+</style>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页
+        <span class="c-gray en">&gt;</span>
+        管理员管理
+        <span class="c-gray en">&gt;</span>
+        管理员列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a>
+</nav>
+<article class="cl pd-20">
+    <!--<div class="text-c">-->
+        <!--<input type="text" class="input-text" style="width:250px" placeholder="输入管理员名称" id="" name="">-->
+        <!--<button type="submit" class="btn btn-success" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜用户</button>-->
+    <!--</div>-->
+    <div class="cl pd-5 bg-1 bk-gray mt-20">
+        <span class="l"  ng-if="adminList">
+            <a href="javascript:;" class="btn btn-primary radius" ng-click="addAdmin()"><i class="Hui-iconfont">&#xe600;</i> 添加管理员</a>
+        </span>
+        <span class="r">共有数据：<strong ng-bind="adminCon.length"></strong> 条</span>
+    </div>
+    <table class="table table-border table-bordered table-bg">
+        <thead>
+        <tr>
+            <th scope="col" colspan="9">员工列表</th>
+        </tr>
+        <tr class="text-c">
+            <th width="10"><input type="checkbox" name="" value=""></th>
+            <th width="10">ID</th>
+            <th width="10">用户名</th>
+            <th width="10">手机</th>
+            <th width="10">角色</th>
+            <th width="10">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="text-c" ng-repeat="x in adminCon">
+            <td><input type="checkbox" value="2" name=""></td>
+            <td>{{x.id}}</td>
+            <td>{{x.nickname}}</td>
+            <td>{{x.phone}}</td>
+            <td><a ui-sref="roleDetail({id:x.role.id})">{{x.role.name}}</a></td>
+            <td class="td-manage" ng-if="editUser">
+                <a style="text-decoration:none" href="javascript:void(0);" title="查看">查看</a>
+                <a title="编辑" href="javascript:void(0);" class="ml-5" style="text-decoration:none" ng-click="editAmin(x)">编辑</a>
+                <a title="删除" href="javascript:void(0);" class="ml-5" style="text-decoration:none" ng-click="delAdmin(x.id)">删除</a>
+            </td>
+            <td ng-if="!editUser">
+                无权限操作
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <page-con></page-con>
+</article>
+<div id="addAdmin" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content radius">
+            <div class="modal-header">
+                <h3 class="modal-title">添加管理员</h3>
+                <a class="close" data-dismiss="modal" aria-hidden="true" href="javascript:void(0);">×</a>
+            </div>
+            <div class="modal-body">
+                <div class="row cl">
+                    <div class="text-c">
+                        <input type="text" name="param" id="" placeholder="请输入id/phone" style="width:78%" class="input-text">
+                        <button name="" id="" class="btn btn-success"  ng-click="searchUser()"><i class="Hui-iconfont"></i> 搜索</button>
+                    </div>
+                </div>
+                <div class="row cl">
+                    <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>ID：</label>
+                    <div class="formControls col-xs-8 col-sm-9">
+                        <input type="text" class="input-text"  name="uId" ng-model="topicCon[0].id">
+                    </div>
+                </div>
+                <div class="row cl">
+                    <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>用户名：</label>
+                    <div class="formControls col-xs-8 col-sm-9">
+                        <input type="text" class="input-text"  name="uNick" ng-model="topicCon[0].nickname">
+                    </div>
+                </div>
+                <div class="row cl">
+                    <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>手机号：</label>
+                    <div class="formControls col-xs-8 col-sm-9">
+                        <input type="text" class="input-text"  name="uPhone" ng-model="topicCon[0].phone">
+                    </div>
+                </div>
+                <div class="row cl">
+                    <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>角色：</label>
+                    <div class="formControls col-xs-8 col-sm-9">
+                        <span class="select-box" style="width:150px;">
+                            <select class="select" ng-change="selectRole(selectValue)" ng-model="selectValue" name="uRole">
+                                <option value="0">----请选择角色----</option>
+                                <option ng-repeat="x in roleCon" value="{{x.id}}">{{x.name}}</option>
+                            </select>
+				        </span>
+                    </div>
+                </div>
+                <div class="row cl">
+                    <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+                        <button class="btn btn-primary createBtn" ng-click="saveAdmin()">保存</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="editAdmin" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content radius">
+            <div class="modal-header">
+                <h3 class="modal-title">编辑管理员</h3>
+                <a class="close" data-dismiss="modal" aria-hidden="true" href="javascript:void(0);">×</a>
+            </div>
+            <div class="modal-body">
+                <div class="row cl">
+                    <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>角色名字：</label>
+                    <div class="formControls col-xs-8 col-sm-9">
+                        <input type="text" class="input-text ng-pristine ng-untouched ng-valid ng-not-empty" placeholder="请输入。。。" name="uName" value="zhangsan" disabled="disabled">
+                    </div>
+                </div>
+                <div class="row cl">
+                    <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>角色：</label>
+                    <div class="formControls col-xs-8 col-sm-9">
+                        <span class="select-box" style="width:150px;">
+                            <select class="select" name="adminRole" size="1">
+                                <option  ng-repeat="x in roleCon" value="{{x.id}}">{{x.name}}</option>
+                            </select>
+				        </span>
+                    </div>
+                </div>
+                <div class="row cl">
+                    <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+                        <button class="btn btn-primary createBtn" ng-click="createUser()">编辑</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,50 @@
+<nav class="breadcrumb ng-scope">
+    <i class="Hui-iconfont"></i> <a ui-sref="home">首页</a> <span class="c-gray en">&gt;</span> {{title}} <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href='javascript:location.reload()' title="刷新">
+    <i class="Hui-iconfont"></i></a>
+</nav>
+<article class="page-container">
+    <search-con2 style="display: inline-block"></search-con2>
+    <div class="searchLine">
+        <div class="clear"></div>
+        <input type="text" name="circle_id" placeholder="话题圈id" class="marginI">
+        <input type="text" name="author" placeholder="作者" style="border-right: 1px solid #dadada;">
+    </div>
+    <div class="clear"></div>
+    <div style="margin-top: 10px;">
+        <div class="commonIit">话题列表</div>
+        <div class="tableCon">
+            <table class="tableMain" cellpadding="0" cellspacing="0" width="100%">
+                <tr>
+                    <th width="5%"><input type="checkbox" name="checkAll"></th>
+                    <th width="5%">话题ID</th>
+                    <th width="20%">标题</th>
+                    <th width="10%">话题标题</th>
+                    <th width="10%">作者</th>
+                    <th width="10%">点赞数</th>
+                    <th width="10%">评论数</th>
+                    <th width="10%">礼物数</th>
+                    <th width="15%">时间</th>
+                    <th width="20%" ng-if="editUser">操作</th>
+                </tr>
+                <tr ng-repeat="topicList in topicCon" repeat-done="">
+                    <td><input type="checkbox" name="id"></td>
+                    <td>{{topicList.id}}</td>
+                    <td class="alignL">{{topicList.title}}</td>
+                    <td class="alignL">{{topicList.summary}}</td>
+                    <td>{{topicList.author}}</td>
+                    <td>{{topicList.likes}}</td>
+                    <td>{{topicList.topic_comment_count}}</td>
+                    <td>{{topicList.gifts}}</td>
+                    <td>{{topicList.created_at*1000 | data}}</td>
+                    <td ng-if="editUser">
+                        <a href="javascript:void(0);" ui-sref="topicDetail({id:topicList.id})">编辑</a>
+                        <a href="javascript:void(0);" ng-click="deletData(topicList.id)">删除</a>
+                        <a href="javascript:void(0);" ng-click="changeLine(topicList.id,topicList.online)">{{ {true:'下线',false:'上线'}[topicList.online] }}</a>
+                        <a href="javascript:;" ng-click="failEvent(topicList.id,'no')" ng-if=" topicList.online==false && topicList.checked != 'fail' ">审核失败</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <page-con></page-con>
+</article>

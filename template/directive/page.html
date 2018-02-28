@@ -1,0 +1,13 @@
+<div class="pageCon">
+    <div class="rightCount">第{{topicPage.current_page}}页，共{{topicPage.total_pages}}页，共{{topicPage.total_count}}条</div>
+    <div class="pagination">
+        <ul>
+            <li ng-click="changePage('pre')"><a href="javascript:void(0);">上一页</a></li>
+            <li ng-click="changePage(1)"><a href="javascript:void(0);"><i class="Hui-iconfont Hui-iconfont-slider-left"></i></a></li>
+
+            <li ng-click="changePage(topicPage.total_pages)" id="finally"><a href="javascript:void(0);"><i class="Hui-iconfont Hui-iconfont-slider-right"></i></a></li>
+            <li ng-click="changePage('next')"><a href="javascript:void(0);">下一页</a></li>
+        </ul>
+    </div>
+    <div class="jumpPage">跳转到 <input type="text" name="jumpPage" /> 页 <button class="jumpBtn" ng-click="jumpPage()">确定</button></div>
+</div>

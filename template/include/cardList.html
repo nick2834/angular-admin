@@ -1,0 +1,63 @@
+<nav class="breadcrumb ng-scope">
+    <i class="Hui-iconfont"></i> <a ui-sref="home">首页</a> <span class="c-gray en">>卡片管理
+    <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href='javascript:location.reload()' title="刷新">
+    <i class="Hui-iconfont"></i></a>
+</nav>
+<article class="page-container">
+    <div class="commonIit"><export-excel></export-excel>卡片列表</div>
+    <div class="searchLine">
+        <input type="date" placeholder="开始时间" name="start_time" class="marginI">
+        <input type="date" placeholder="结束时间" name="end_time">
+        <input type="text" name="user_id" placeholder="获得人id" class="marginI">
+        <input type="text" name="name" placeholder="金额">
+        <button class="searchBrn" ng-click="search()">搜索</button>
+        <div class="clear"></div>
+        <div class="conditionLine">
+            <p style="float: left;line-height: 30px;">是否使用：</p>
+            <select name="used" class="selectBar">
+                <option value="true">已使用</option>
+                <option value="false">未使用</option>
+                <option value="all">全部</option>
+            </select>
+            <p style="float: left;line-height: 30px;margin-left: 10px;">卡片类型：</p>
+            <select name="precondition" class="selectBar">
+                <option value="additional_checkin">补签</option>
+                <option value="credit">加速</option>
+                <option value="lottery">抽奖</option>
+                <option value="free_interest">免息</option>
+                <option value="erase_remark">消差评</option>
+                <option value="raise_amount">提额</option>
+            </select>
+        </div>
+    </div>
+    <div class="tableCon" id="tableScroll" style="overflow: hidden;">
+        <table class="tableMain noneOverflow" cellpadding="0" cellspacing="0" width="100%" >
+            <tr>
+                <th width="5%">卡片id</th>
+                <th width="5%">卡片名</th>
+                <th width="5%">卡片金额</th>
+                <th width="5%">是否使用</th>
+                <th width="5%">获得人id</th>
+                <th width="5%">昵称</th>
+                <th width="5%">有效期</th>
+                <th width="5%">获取日期</th>
+                <th width="5%">使用日期</th>
+                <th width="5%">使用人手机号</th>
+            </tr>
+            <tr ng-repeat="topicList in withdrawList" repeat-done="">
+                <td>{{topicList.id}}</td>
+                <td>{{topicList.name}}</td>
+                <td>{{topicList.price}}</td>
+                <td>{{topicList.used | used}}</td>
+                <td><a ui-sref="userDatas({id:topicList.owner_id})">{{topicList.owner_id}}</a></td>
+                <td>{{topicList.owner_name}}</td>
+                <td>{{topicList.valid_to | data2}}</td>
+                <td>{{topicList.valid_from | data2}}</td>
+                <td><span ng-if="topicList.used">{{topicList.updated_at | data}}</span></td>
+                <td>{{topicList.mobile}}</td>
+
+            </tr>
+        </table>
+    </div>
+    <page-con></page-con>
+</article>>

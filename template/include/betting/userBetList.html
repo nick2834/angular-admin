@@ -1,0 +1,66 @@
+<nav class="breadcrumb ng-scope">
+    <i class="Hui-iconfont"></i> <a ui-sref="home">首页</a> <span class="c-gray en">>用户竞猜列表
+    <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href='javascript:location.reload()' title="刷新">
+        <i class="Hui-iconfont"></i></a>
+</nav>
+<article class="page-container">
+    <div class="commonIit">用户搜索 <export-excel></export-excel></div>
+    <!--<search-con></search-con>-->
+    <div class="searchLine">
+        <div class="addCon">
+            <i class="icon-plus addIcon"></i>
+            <ul class="addList">
+                <li ng-repeat="x in conditions" ng-click="addInput(x)"><a href="JavaScript:void(0);">{{x}}</a></li>
+            </ul>
+        </div>
+        <input type="text" placeholder="请输入id" name="user_id"><button class="searchBrn" ng-click="search()">搜索</button>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div class="commonIit">用户列表</div>
+    <div style="margin-top: 10px;">
+
+        <div class="tableCon">
+            <table class="tableMain" cellpadding="0" cellspacing="0" width="100%">
+                <tr>
+                    <!--<th width="5%"><input type="checkbox" name="checkAll"></th>-->
+                    <th width="10%">id</th>
+                    <!--<th width="20%">用户名</th>-->
+                    <th width="20%">昵称</th>
+                    <th width="15%">手机号</th>
+                    <!--<th width="20%">性别</th>-->
+                    <th width="15%">投资总次数</th>
+                    <th width="15%">投资总金额</th>
+                    <th width="15%">总收益</th>
+                    <!--<th width="15%">接受任务评分</th>
+                    <th width="15%">邀请码</th>-->
+                    <th width="20%">操作</th>
+                </tr>
+                <tr ng-repeat="topicList in topicCon" repeat-done="">
+                    <!--<td><input type="checkbox" title="{{topicList.id}}"></td>-->
+                    <td>{{topicList.id}}</td>
+                    <!--<td>{{topicList.name}}</td>-->
+                    <td>{{topicList.nickname}}</td>
+                    <td>{{topicList.phone}}</td>
+                    <td>{{topicList.bet_count}}</td>
+                    <td>{{topicList.betting}}</td>
+                    <td>{{topicList.gain}}</td>
+                    <!--<td>{{topicList.owner_score}}</td>
+                    <td>{{topicList.employee_score}}</td>-->
+                    <!--<td>{{topicList.invite}}</td>-->
+                    <td>
+                        <div ng-if="editUser">
+                            <a href="javascript:void(0)" ui-sref="userBetInfo({id:topicList.id})">查看</a>
+                        </div>
+                        <!--<span ng-show="topicList.payment_locked" ng-click="unlock(topicList.id)">解锁</span>
+                        <span ng-show="!topicList.payment_locked && topicList.payment_initialized " ng-click="binding(topicList.wallet_id)">重绑</span>
+                        <span ng-show="!topicList.vip" ng-click="addMember(topicList.vip,topicList.id)">加V</span>
+                        <span ng-show="topicList.vip" ng-click="addMember(topicList.vip,topicList.id)">解V</span>-->
+
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <page-con></page-con>
+</article>

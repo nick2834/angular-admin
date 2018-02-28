@@ -1,0 +1,66 @@
+<nav class="breadcrumb ng-scope">
+    <i class="Hui-iconfont"></i> <a ui-sref="home">首页</a> <span class="c-gray en">><a ui-sref="groupList">用户组列表</a> <span class="c-gray en">>编辑用户组
+    <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href='javascript:location.reload()' title="刷新">
+    <i class="Hui-iconfont"></i></a>
+</nav>
+<article class="page-container">
+    <div class="commonIit">角色信息</div>
+    <div class="tableCon">
+        <table class="tableMain" cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+                <th width="10%">id</th>
+                <th width="30%">name</th>
+                <th width="40%">des</th>
+            </tr>
+            <tr>
+                <td>{{groupCon.id}}</td>
+                <td>{{groupCon.name}}</td>
+                <td>{{groupCon.description}}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="commonIit">此群组包含的角色</div>
+    <div class="permissions delete1">
+        <span ng-repeat="x in groupCon.roles" ng-click="">{{x.name}} <i class="Hui-iconfont Hui-iconfont-close2" ng-click="delete1(x.id)"></i></span>
+        <p class="tag" ng-if="groupCon.roles.length == 0">暂无权限~</p>
+    </div>
+    <button class="commonBtn" ng-click="addG(showR)">添加角色</button>
+    <div class="permissions noneSelect addPrn" style="display: none;">
+        <span ng-repeat="x in roleCon" ng-click="addR2(x.id)">{{x.name}}</span>
+    </div>
+    <div class="commonIit">此群组包含的用户</div>
+    <div class="permissions">
+        <span ng-repeat="x in groupCon.users">{{x.nickname}} <i class="Hui-iconfont Hui-iconfont-close2" ng-click="removeUserInG(x.id)"></i></span>
+        <p class="tag" ng-if="groupCon.users.length == 0">暂无用户~</p>
+    </div>
+    <button class="commonBtn" ng-click="addU(showU)">添加用户</button>
+    <div class="addU">
+        <input type="text" placeholder="请输入id/phone" class="searchUser" name="param">
+        <button class="searchUBtn" ng-click="searchUser()">搜索</button>
+        <div class="tag2">请先搜索你要添加的用户</div>
+        <div class="clear"></div>
+        <div class="conM" ng-if="! topicCon.length == 0">
+            <div class="tableCon">
+                <table class="tableMain" cellpadding="0" cellspacing="0" width="100%">
+                    <tr>
+                        <th width="5%">id</th>
+                        <th width="20%">nickname</th>
+                        <th width="20%">phone</th>
+                        <th width="20%">gender</th>
+                        <th width="30%">school</th>
+                        <th width="30%">操作</th>
+                    </tr>
+                    <tr ng-repeat="topicList in topicCon">
+                        <td>{{topicList.id}}</td>
+                        <td>{{topicList.nickname}}</td>
+                        <td>{{topicList.phone}}</td>
+                        <td>{{topicList.gender}}</td>
+                        <td>{{topicList.school || '无'}}</td>
+                        <td><a href="javascript:void(0);" ng-click="addToGroup(topicList.id)">添加</a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</article>
+

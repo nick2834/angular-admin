@@ -1,0 +1,33 @@
+<nav class="breadcrumb ng-scope">
+    <i class="Hui-iconfont"></i> <a ui-sref="home">首页</a> <span class="c-gray en">>活动数据详情<span class="c-gray en">>签到数据统计
+    <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href='javascript:location.reload()' title="刷新">
+    <i class="Hui-iconfont"></i></a>
+</nav>
+<article class="page-container">
+    <div class="commonIit">签到数据</div>
+    <search-con2></search-con2>
+    <div class="tableCon" id="tableScroll" style="overflow: hidden;">
+        <div class="container" style="margin-top: 20px">
+            <p>补签卡总数：<span ng-bind="total_checkin_card"></span></p>
+        </div>
+        <table class="tableMain" cellpadding="0" cellspacing="0" width="100%" >
+            <tr>
+                <th width="10%">日期</th>
+                <th width="5%">签到总数</th>
+                <th width="5%">红包总金额</th>
+                <th width="5%">补签卡使用数</th>
+                <th width="5%">今日送出补签卡数</th>
+                <th width="5%">签到总积分</th>
+            </tr>
+            <tr ng-repeat="topicList in withdrawList" repeat-done="">
+                <td>{{topicList.date }}</td>
+                <td>{{topicList.number }}</td>
+                <td>{{coupons[$index].price }}</td>
+                <td>{{card_used[$index].number }}</td>
+                <td>{{card_send[$index].number }}</td>
+                <td>{{credit[$index].number }}</td>
+            </tr>
+        </table>
+    </div>
+    <page-con></page-con>
+</article>

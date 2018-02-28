@@ -1,0 +1,104 @@
+<nav class="breadcrumb ng-scope">
+    <i class="Hui-iconfont"></i> <a ui-sref="home">首页</a> <span class="c-gray en">>竞猜列表
+    <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href='javascript:location.reload()' title="刷新">
+        <i class="Hui-iconfont"></i></a>
+</nav>
+<article class="page-container">
+    <div class="commonIit">比赛列表</div>
+    <div class="searchLine">
+        <input style="float: none;border: 1px solid #e6e6e6" class="form-control"  type="text" ng-model="key" placeholder="请输入比赛名称"/>
+    </div>
+    <div class="tableCon" id="tableScroll">
+        <table class="tableMain noneOverflow" cellpadding="0" cellspacing="0" style="width: 150%">
+            <thead ng-click="col='id';desc=!desc">
+                <tr>
+                    <th width="10%">id</th>
+                    <th width="10%">投注</th>
+                    <th width="5%">状态</th>
+                    <th width="10%">名称</th>
+                    <th width="10%">队伍1</th>
+                    <th width="10%">队伍2</th>
+                    <th width="15%">比赛开始时间</th>
+                    <th width="15%">比赛结束时间</th>
+                    <th width="15%">投注开始时间</th>
+                    <th width="15%">投注结束时间</th>
+                    <th width="10%">投注1队金额</th>
+                    <th width="10%">投注2队金额</th>
+                    <th width="10%">投注平局金额</th>
+                    <th width="10%">投注1队人数</th>
+                    <th width="10%">投注2队人数</th>
+                    <th width="10%">投注平局人数</th>
+                    <th width="10%">比分</th>
+                    <th width="10%">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="topicList in bettingList |filter: {name: key} | orderBy:col:!desc" repeat-done="">
+                    <td>{{topicList.id}}</td>
+                    <td>
+                        <div ng-if="betting">
+                            <button ng-if="topicList.status=='execute'|| topicList.status=='opening'" class="btn btn-primary" ng-click="bet(topicList)">投注</button>
+                        </div>
+                    </td>
+                    <td ng-show="topicList.status=='finished'" style="color: red">{{topicList.status | bet_status}}</td>
+                    <td ng-show="topicList.status=='cancel'" style="color: gray">{{topicList.status | bet_status}}</td>
+                    <td ng-show="topicList.status=='execute'" style="color: green">{{topicList.status | bet_status}}</td>
+                    <td ng-show="topicList.status=='opening'" style="color: green">{{topicList.status | bet_status}}</td>
+                    <td>{{topicList.name}}</td>
+                    <td>{{topicList.group_a}}</td>
+                    <td>{{topicList.group_b}}</td>
+                    <td>{{topicList.match_start_time | data}}</td>
+                    <td>{{topicList.match_end_time | data}}</td>
+                    <td>{{topicList.bet_start_time | data}}</td>
+                    <td>{{topicList.bet_end_time | data}}</td>
+                    <td>{{topicList.group_a_betting}}</td>
+                    <td>{{topicList.group_b_betting}}</td>
+                    <td>{{topicList.draw_betting}}</td>
+                    <td>{{topicList.group_a_count}}</td>
+                    <td>{{topicList.group_b_count}}</td>
+                    <td>{{topicList.draw_count}}</td>
+                    <td>{{topicList.match_result}}</td>
+                    <td><a href="#/bettingInfo/{{topicList.id}}">查看</a> |<a href="#/bet/{{topicList.id}}">编辑</a> | <a href="javascript:;" ng-click="delete_bet(topicList.id)">删除</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</article>
+<div id="modal-betting" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content radius">
+            <div class="modal-header">
+                <h5 class="modal-title" style="text-align: center">投注 <strong>{{bettingInfoMsg.name}}</strong></h5>
+                <a class="close" data-dismiss="modal" aria-hidden="true" href="javascript:void(0);">×</a>
+            </div>
+            <div class="modal-body">
+                <div class="text-c pd-10" style="font-size: 18px">
+                    <span><span>{{bettingInfoMsg.bet_start_time | data2}}</span><span>{{bettingInfoMsg.name}}</span></span><br> 胜负平
+                </div>
+                <div class="count">当前账户余额：<span>{{wallet}}</span></div>
+                <div class="betList">
+                    <ul>
+                        <li>
+                            <div class="fl w1" style="margin-left: 5%;">
+                                <span class="name">{{bettingInfoMsg.group_a}}</span>
+                                <span class="data">主胜 <span>{{bettingInfoMsg.group_a_count}}</span></span>
+                                </div>
+                            <div class="fl w3 hot">
+                                <span class="name">VS</span>
+                                <span class="data">平 <span>{{bettingInfoMsg.draw_count}}</span></span>
+                            </div>
+                            <div class="fl w1">
+                                <span class="name">{{bettingInfoMsg.group_b}}</span>
+                                <span class="data">客胜 <span>{{bettingInfoMsg.group_b_count}}</span></span>
+                            </div>
+                        </li>
+                        <div class="count">参与总人数：<span>{{bettingInfoMsg.group_a_count + bettingInfoMsg.draw_count + bettingInfoMsg.group_b_count}}</span></div>
+                        <li class="pd-10"><span class="fl" style="width: 30%">投注金额</span><input class="fl input-text" value="10" style="width: 40%" type="text" name="" id="checkNum"></li>
+                        <div class="yuji">预计收益：<span>'+allCount+'</span></div>
+                    </ul>
+                </div>
+                <button class="btn btn-danger mt-30" id="betBtn" ng-click="betBtn()">投注</button>
+            </div>
+        </div>
+    </div>
+</div>

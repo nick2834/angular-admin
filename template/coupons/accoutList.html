@@ -1,0 +1,26 @@
+<nav class="breadcrumb ng-scope">
+    <i class="Hui-iconfont"></i> <a ui-sref="home">首页</a> <span class="c-gray en">>账户余额列表
+    <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href='javascript:location.reload()' title="刷新">
+    <i class="Hui-iconfont"></i></a>
+</nav>
+<article class="page-container">
+<div class="commonIit"><export-excel></export-excel>账户余额列表</div>
+<search-con></search-con>
+<div class="tableCon">
+    <table class="tableMain" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+            <th width="5%">id</th>
+            <th width="5%">金额</th>
+            <th width="5%">玫瑰</th>
+            <th width="5%">钻石</th>
+        </tr>
+        <tr ng-repeat="topicList in topicCon" repeat-done="">
+            <td><a href="#/userDatas/{{topicList.owner_id}}">{{topicList.owner_id}}</a></td>
+            <td>{{topicList.balance}}</td>
+            <td>{{topicList.rose}}</td>
+            <td>{{topicList.diamond}}</td>
+        </tr>
+    </table>
+    <page-con></page-con>
+</div>
+</article>

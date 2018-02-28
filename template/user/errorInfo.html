@@ -1,0 +1,62 @@
+<nav class="breadcrumb ng-scope">
+    <i class="Hui-iconfont"></i> <a ui-sref="home">首页</a> <span class="c-gray en">>错误数据管理
+    <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href='javascript:location.reload()' title="刷新">
+    <i class="Hui-iconfont"></i></a>
+</nav>
+<article class="page-container">
+    <div class="commonIit"><export-excel></export-excel>错误数据管理</div>
+    <div class="searchLine ng-scope">
+        <input type="date" placeholder="开始时间" name="bgnT" class="marginI">
+        <input type="date" placeholder="结束时间" name="endT">
+        <button class="searchBrn" ng-click="search2()">搜索</button>
+        <div class="clear"></div>
+        <input type="text" placeholder="phone" name="phone" class="marginI" style="margin: 10px 0 0 0;width: 200px;">
+    </div>
+    <!--<search-con2></search-con2>-->
+    <div class="tableCon">
+        <table class="tableMain" cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+                <!--<th width="5%"><input type="checkbox" name="checkAll"></th>-->
+                <th width="8%">用户名</th>
+                <th width="12%">手机号</th>
+                <th width="10%">学校</th>
+                <th width="40%">地址</th>
+                <th width="10%">时间</th>
+                <th width="20%" ng-if="editUser">操作</th>
+            </tr>
+            <tr ng-repeat="topicList in withdrawList" repeat-done="">
+                <!--<td><input type="checkbox" title="{{topicList.id}}"></td>-->
+                <td clip-click="dosome()" clip-copy-mime-type="text/html">{{topicList.username}}</td>
+                <td>{{topicList.mobile}}</td>
+                <td>{{topicList.school}}</td>
+                <td>{{topicList.location}}</td>
+                <td>{{topicList.created_at | data}}</td>
+                <td  ng-if="editUser">
+                    <!--<a href="javascript:;" ng-click="showPosition(topicList.position,topicList.school)">查看位置</a>-->
+                    <a href="javascript:;" ng-click="showPosition(topicList.position,topicList.school)">查看位置</a>
+                    <span ng-if="topicList.loan_verified == 'none' ">
+                        <a href="javascript:;" ng-click="loanEvent(topicList.id,'success')">通过借款</a>
+                        <a href="javascript:;" ng-click="loanEvent(topicList.id,'fail')">拒绝借款</a>
+                    </span>
+                        <span ng-if="topicList.loan_verified == 'success' ">
+                        通过
+                    </span>
+                        <span ng-if="topicList.loan_verified == 'fail' ">
+                        拒绝
+                    </span>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <page-con></page-con>
+
+    <div class="mapCon">
+        <div class="mapTop">
+            <i class="Hui-iconfont Hui-iconfont-close2 mapClose" ng-click="close()"></i>
+            <p class="mapTopL">当前用户经纬度：{{userP}} <span> (红色为学校位置，蓝色为借款人位置)</span></p>
+        </div>
+        <div id="mapCon" style="width:100%; height:100%"></div>
+    </div>
+
+</article>
+

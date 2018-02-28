@@ -1,0 +1,56 @@
+<nav class="breadcrumb ng-scope">
+    <i class="Hui-iconfont"></i> <a ui-sref="home">首页</a> <span class="c-gray en">></span><a ui-sref="bettingList">竞猜列表</a> <span class="c-gray en">></span>编辑比赛
+    <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href='javascript:location.reload()' title="刷新">
+        <i class="Hui-iconfont"></i></a>
+</nav>
+<article class="page-container">
+    <div class="commonIit">比赛详情</div>
+    <div class="inputLine2">
+        <p>标题：</p><input type="text" name="tit" value="{{bets.name}}">
+    </div>
+    <div class="inputLine2">
+        <p>队伍1：</p><input type="text" name="team1" value="{{bets.group_a}}">
+    </div>
+    <div class="inputLine2">
+        <p>队伍2：</p><input type="text" name="team2" value="{{bets.group_b}}">
+    </div>
+    <div class="inputLine2">
+        <p>比赛开始时间：</p><input type="datetime-local" name="gameBegin" ng-value="bets.match_start_time | data3">
+    </div>
+    <div class="inputLine2">
+        <p>比赛结束时间：</p><input type="datetime-local" name="gameEnd" ng-value="bets.match_end_time | data3">
+    </div>
+    <div class="inputLine2">
+        <p>投标开始时间：</p><input type="datetime-local" name="betBegin" ng-value="bets.bet_start_time | data3">
+    </div>
+    <div class="inputLine2">
+        <p>投标截止时间：</p><input type="datetime-local" name="betEnd" ng-value="bets.bet_end_time | data3">
+    </div>
+    <div class="inputLine2">
+        <p>比分：</p><input type="text" placeholder="例: 1:0" name="ratio" ng-value="bets.match_result">
+    </div>
+    <div class="clear"></div>
+    <div class="inputLine2">
+        <p>比赛结果：</p>
+        <select class="navTit" style="background:white;color:black;" name="betResult">
+            <option value="" >请选择</option>
+            <option value="3" >A队胜</option>
+            <option value="1" >平</option>
+            <option value="0" >B队胜</option>
+            
+            <!--<option value="finished" ng-selected="bets.status == 'finished'">已完成</option>-->
+        </select>
+    </div>
+    <div class="clear"></div>
+    <div class="inputLine2">
+        <p>状态：</p>
+        <select name="status" class="navTit" style="background:white;color:black;">
+            <option value="opening" ng-selected="bets.status == 'opening' ">未开始</option>
+            <option value="execute" ng-selected="bets.status == 'execute'">进行中</option>
+            <option value="cancel" ng-selected="bets.status == 'cancel'">已取消</option>
+            <option value="finished" ng-selected="bets.status == 'finished'">已完成</option>
+        </select>
+    </div>
+    <div class="clear"></div>
+    <button class="btn2" ng-click="saveData()">保存</button>
+</article>

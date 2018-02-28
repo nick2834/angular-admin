@@ -1,0 +1,74 @@
+<nav class="breadcrumb ng-scope">
+    <i class="Hui-iconfont"></i> <a ui-sref="home">首页</a> <span class="c-gray en">>{{title}}
+    <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href='javascript:location.reload()' title="刷新">
+    <i class="Hui-iconfont"></i></a>
+</nav>
+<article class="page-container">
+<div class="commonIit"><export-excel></export-excel>财务统计报表</div>
+<div class="searchLine">
+    <input type="date" placeholder="开始时间" name="bgnT" class="marginI">
+    <input type="date" placeholder="结束时间" name="endT">
+    <input type="text" placeholder="手机号" name="phone" class="marginI" style="width: 200px;">
+    <input type="text" placeholder="id" name="uid" class="marginI" style="width: 200px;">
+    <div class="inputLine2" style="margin:0;padding:0;">
+        <input type="text"  class="marginI selectIcon2" style="width: 202px;margin: 0;" value="订单状态" name="type">
+        <ul style="left: 0px;width: 202px;">
+            <li>全部</li>
+            <li>审核中</li>
+            <li>未通过</li>
+            <li>待支付</li>
+            <li>支付失败</li>
+            <li>支付完成</li>
+        </ul>
+    </div>
+    <button class="searchBrn" ng-click="search()" style="margin-left: 10px;">搜索</button>
+    <div class="clear"></div>
+
+
+
+
+</div>
+<div class="tableCon" id="tableScroll" style="overflow: hidden;">
+    <table class="tableMain" cellpadding="0" cellspacing="0" width="120%" >
+        <tr>
+            <th width="10%">日期</th>
+            <th width="5%">用户ID</th>
+            <th width="5%">姓名</th>
+            <th width="5%">账户类型</th>
+            <th width="10%">账户名</th>
+            <th width="5%">提现金额</th>
+            <th width="5%">状态</th>
+            <th width="5%">备注</th>
+            <!--<th width="20%">操作</th>-->
+            <th width="10%">订单号</th>
+            <th width="10%">身份证</th>
+        </tr>
+        <tr ng-repeat="topicList in withdrawList" repeat-done="">
+            <td clipboard text="topicList.created_at | data" >{{topicList.created_at | data }}</td>
+            <td clipboard text="topicList.user.id">{{topicList.user.id }}</td>
+            <td clipboard text="topicList.profile.real_name ">{{topicList.profile.real_name }}</td>
+            <td clipboard text="topicList.order_type  | accountType">{{topicList.order_type  | accountType}}</td>
+            <td clipboard text="topicList.profile.ali_account">{{topicList.profile.ali_account}}</td>
+            <td clipboard text="topicList.amount">{{topicList.amount}}</td>
+            <td clipboard text="topicList.topicList.permitted+'|'+topicList.finished | review">{{topicList.permitted+'|'+topicList.finished | review }}</td>
+            <td clipboard text="topicList.memo.deny_reason">{{topicList.memo.deny_reason}}</td>
+            <!--<td><a ui-sref="audit({userid:topicList.user.id,id:topicList.id})" class="commonBtn2">审核</a><a href="javascript:void(0)" class="commonBtn2" ng-click='withdrawCtrl1(topicList.id)'>支付成功</a><a href="javascript:void(0)" ng-click='withdrawCtrl2(topicList.id)' class="commonBtn2">支付失败</a></td>-->
+            <td clipboard text="topicList.order_no">{{topicList.order_no}}</td>
+            <td clipboard text="topicList.profile.order_no">{{topicList.profile.id_card}}</td>
+        </tr>
+    </table>
+</div>
+<page-con></page-con>
+</article>>
+<script>
+    $(function(){
+        $(".inputLine2 .selectIcon2").click(function(){
+            $(this).next("ul").slideToggle();
+        });
+        $(".inputLine2 li").click(function(){
+            var ele = $(this).html();
+            $(this).parent().slideUp();
+            $(this).parent().prev().val(ele);
+        })
+    });
+</script>

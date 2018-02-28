@@ -1,0 +1,39 @@
+<nav class="breadcrumb ng-scope">
+    <i class="Hui-iconfont"></i> <a ui-sref="home">首页</a> <span class="c-gray en">&gt;</span> <a ui-sref="userList">用户列表</a><span class="c-gray en">&gt;</span>内部用户统计表
+    <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href='javascript:location.reload()' title="刷新">
+        <i class="Hui-iconfont"></i></a>
+</nav>
+<div id="showR"></div>
+<article class="page-container">
+<div class="commonIit" ng-if="editUser">内部用户统计表
+    <export-excel></export-excel>
+</div>
+<search-con2></search-con2>
+<div class="tableCon" id="tableScroll" style="overflow: hidden;">
+    <table class="tableMain" cellpadding="0" cellspacing="0" width="100%" >
+        <tr>
+            <th width="10%">日期</th>
+            <th width="10%">用户名</th>
+            <th width="10%">真实姓名</th>
+            <th width="10%">用户ID</th>
+            <th width="10%">app打开次数</th>
+            <th width="10%">是否签到</th>
+            <th width="10%">投注总金额</th>
+            <th width="10%">评论数量</th>
+            <th width="10%">转发分享次数</th>
+        </tr>
+        <tr ng-repeat="behaviorList in behavior" repeat-done="">
+            <td>{{behaviorList.date | data2}}</td>
+            <td>{{behaviorList.nickname}}</td>
+            <td>{{behaviorList.real_name}}</td>
+            <td>{{behaviorList.user_id}}</td>
+            <td>{{behaviorList.login_count}}</td>
+            <td>{{behaviorList.checkin | behaviorStatus}}</td>
+            <td>{{behaviorList.bet_amount}}</td>
+            <td>{{behaviorList.comment_count}}</td>
+            <td>{{behaviorList.share_count}}</td>
+        </tr>
+    </table>
+</div>
+<page-con></page-con>
+</article>

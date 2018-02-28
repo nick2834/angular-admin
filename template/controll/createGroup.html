@@ -1,0 +1,11 @@
+<nav class="breadcrumb ng-scope">
+    <i class="Hui-iconfont"></i> <a ui-sref="home">首页</a> <span class="c-gray en">>创建用户组
+    <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href='javascript:location.reload()' title="刷新">
+    <i class="Hui-iconfont"></i></a>
+</nav>
+<article class="page-container">
+    <div class="inputLine"><p>用户组名字：</p><input type="text" placeholder="请输入。。。" name="groupN" value="{{groups.name}}"></div>
+    <div class="textareaCon"><p>用户组描述：</p><textarea placeholder="权限描述" name="groupDes">{{groups.description}}</textarea></div>
+    <button class="createBtn" ng-click="createG()">创建用户组</button>
+</article>
+

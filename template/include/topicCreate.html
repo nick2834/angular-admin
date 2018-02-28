@@ -1,0 +1,123 @@
+<nav class="breadcrumb ng-scope">
+    <i class="Hui-iconfont"></i> <a ui-sref="home">首页</a> <span class="c-gray en">&gt;</span> {{title}} <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href='javascript:location.reload()' title="刷新">
+    <i class="Hui-iconfont"></i></a>
+</nav>
+<article class="page-container">
+    <input class="tit3" type="text" placeholder="请输入标题" name="title" />
+    <input class="tit3 tit2" type="text" placeholder="描述" name="des">
+    <input class="tit3 tit2" type="text" placeholder="作者" name="author">
+    <div class="fileCon2">
+        <form method="post" enctype="multipart/form-data">
+            <input type="file" name="imgfile">
+            <input type="text" class="fileI" placeholder="banner图" name="banner" /><button class="fileBtn"><i class="Hui-iconfont Hui-iconfont-upload">选取图片</i></button>
+        </form>
+    </div>
+    <div class="fileCon2">
+        <form method="post" enctype="multipart/form-data">
+            <input type="file" name="imgfile">
+            <input type="text" class="fileI" placeholder="图标" name="icon" /><button class="fileBtn"><i class="Hui-iconfont Hui-iconfont-upload">选取图片</i></button>
+        </form>
+    </div>
+    <input class="tit3 tit2" type="text" placeholder="标签">
+    <div class="textLine">
+        <p class="textLeft">话题类型:</p>
+        <label class="mrL"><input type="radio" name="circle_type" value="long" id="longCheck"> 长话题</label>
+        <label class="mrL"><input type="radio" name="circle_type" value="short" checked id="shortCheck"> 短话题</label>
+    </div>
+    <div class="textLine videos">
+        <input class="tit3 tit2 videoUrl" type="text" name="videoUrl" placeholder="视频链接" style="margin: 0">
+        <div class="fileCon2" style="height: 40px">
+            <form method="post" enctype="multipart/form-data">
+                <input type="file" name="imgfile">
+                <input type="text" class="fileI" placeholder="视频封面图" name="videoImg" /><button class="fileBtn"><i class="Hui-iconfont Hui-iconfont-upload">选取图片</i></button>
+            </form>
+        </div>
+    </div>
+    <div class="textLine">
+        <p class="textLeft">所属圈子:</p>
+        <select class="commonSelect" name="circle_id" style="float: left;margin-top:8px;padding:0 5px;margin-left: 5px;">
+            <option ng-repeat="cA in circleCon.official_circle" value="{{cA.id}}">
+                {{cA.name}}
+            </option>
+            <option ng-repeat="c in circleCon.circles" value="{{c.id}}">
+                {{c.name}}
+            </option>
+        </select>
+    </div>
+    <div class="editorCon">
+        <div class="editorTit">
+            <div class="toolCon">
+                <ul>
+                    <li>
+                        <i class="icon-bold Hui-iconfont Hui-iconfont-bold"></i>
+                        <i class="icon-italic Hui-iconfont Hui-iconfont-italic"></i>
+                        <span class="vertical"></span>
+                        <i class="icon-h1 Hui-title Hui-iconfont" title="大标题">H1</i>
+                        <i class="icon-h2 Hui-title Hui-iconfont" title="大标题">H2</i>
+                        <i class="icon-h3 Hui-title Hui-iconfont" title="中标题">H3</i>
+                        <i class="icon-h4 Hui-title Hui-iconfont" title="中标题">H4</i>
+                        <i class="icon-h5 Hui-title Hui-iconfont" title="小标题">H5</i>
+                        <i class="icon-h6 Hui-title Hui-iconfont" title="小标题">H6</i>
+                        <span class="vertical"></span>
+                        <i class="icon-link Hui-iconfont Hui-iconfont-link"></i>
+                        <i class="icon-quote-left Hui-iconfont Hui-iconfont-code"></i>
+                        <i class="icon-picture Hui-iconfont Hui-iconfont-picture"></i>
+                        <i class="icon-list-ol Hui-iconfont Hui-iconfont-ordered-list"></i>
+                        <i class="icon-list-ul Hui-iconfont Hui-iconfont-unordered-list"></i>
+                        <i class="icon-minus Hui-iconfont Hui-iconfont-jianhao"></i>
+                        <span class="vertical"></span>
+                        <i class="icon-reply Hui-iconfont Hui-iconfont-chexiao"></i>
+                        <i class="Hui-iconfont Hui-iconfont-zhongzuo"></i>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="editorBot">
+            <div class="writeCon">
+                <textarea placeholder="正文" class="writeTool" id="writeTool" name="article"></textarea>
+            </div>
+            <div class="viewCon">
+            </div>
+        </div>
+    </div>
+    <div class="voteCon">
+        <div class="voteTit"><a href="javascript:void(0)"><label><input type="checkbox" name="vote_judge" /> 添加投票</label></a></div>
+        <div class="voteList">
+            <div class="inputL"><p>标题:</p><input type="text" class="lineI" name="vote_name" /></div>
+            <div class="inputL">
+                <label class="selectType">
+                    <input type="radio" name="xuanze" checked> 单选
+                </label>
+                <label class="selectType">
+                    <input type="radio" name="xuanze"> 多选
+                </label>
+            </div>
+            <div class="inputL">
+                <ul>
+                    <li>
+                        <p>选项1:</p><input type="text" class="lineI" name="xuanxiang" />
+                    </li>
+                    <li>
+                        <p>选项2:</p><input type="text" class="lineI" name="xuanxiang" />
+                    </li>
+                </ul>
+            </div>
+            <div class="operation">
+                <a href="javascript:void(0);" class="addLine">添加一项</a>
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn2">提交</button>
+</article>
+<!--弹出层-->
+<div class="mask2" style="display: none;">
+    <div class="popBox">
+        <div class="popBoxTit"><i class="icon-remove rightIcon"></i><span></span></div>
+        <div class="popMain">
+        </div>
+        <div class="popBtn">
+            <a href="javascript:void(0)" class="subBtn">取消</a>
+            <a href="javascript:void(0)" class="mainBtn">插入</a>
+        </div>
+    </div>
+</div>

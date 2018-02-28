@@ -1,0 +1,41 @@
+<nav class="breadcrumb ng-scope">
+    <i class="Hui-iconfont"></i> <a ui-sref="home">首页</a> <span class="c-gray en">><a ui-sref="roleList">角色列表</a> <span class="c-gray en">>查看角色
+    <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href='javascript:location.reload()' title="刷新">
+    <i class="Hui-iconfont"></i></a>
+</nav>
+<article class="page-container">
+    <div class="commonIit">角色信息</div>
+    <div class="tableCon">
+        <table class="tableMain" cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+                <th width="10%">id</th>
+                <th width="30%">角色名称</th>
+                <th width="40%">角色描述</th>
+            </tr>
+            <tr>
+                <td>{{role.id}}</td>
+                <td>{{role.name}}</td>
+                <td>{{role.description}}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="commonIit">角色权限</div>
+    <div class="permissions delete1">
+        <span ng-repeat="x in role.permissions" ng-click="">{{x.name}} <i class="Hui-iconfont Hui-iconfont-close2" ng-click="delete1(x.id)"></i></span>
+        <p class="tag" ng-if="role.permissions.length == 0">暂无权限~</p>
+    </div>
+    <div class="permissions noneSelect addPrn" style="display: none;">
+        <p>权限列表</p>
+        <span ng-repeat="x in limitCon" ng-click="addPrn2(x.id)">{{x.name}}</span>
+    </div>
+    <div class="commonIit">角色群组</div>
+    <div class="permissions">
+        <span ng-repeat="x in role.groups" ng-click="">{{x.name}} <i class="Hui-iconfont Hui-iconfont-close2" ng-click="delete2(x.id)"></i></span>
+        <p class="tag" ng-if="role.groups.length == 0">暂无群组~</p>
+    </div>
+    <button class="commonBtn" ng-click="addG(showG)">添加群组</button>
+    <div class="permissions noneSelect addG" style="display: none;">
+        <span ng-repeat="x in groupCon" ng-click="addG2(x.id)">{{x.name}}</span>
+    </div>
+</article>
+

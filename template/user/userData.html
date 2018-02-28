@@ -1,0 +1,143 @@
+<nav class="breadcrumb ng-scope">
+    <i class="Hui-iconfont"></i> <a ui-sref="home">首页</a> <span class="c-gray en">&gt;</span> <a ui-sref="userList">用户列表</a><span class="c-gray en">&gt;</span>{{title}}
+    <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href='javascript:location.reload()' title="刷新">
+    <i class="Hui-iconfont"></i></a>
+</nav>
+<article class="page-container">
+    <div class="commonIit">用户基本信息</div>
+    <div class="tableCon">
+        <table class="tableMain" cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+                <th width="5%">用户ID</th>
+                <th width="10%">用户名</th>
+                <th width="10%">注册时间</th>
+                <th width="10%">昵称</th>
+                <th width="5%">内部用户</th>
+                <th width="10%">电话</th>
+                <th width="5%">性别</th>
+                <th width="10%">状态</th>
+                <th width="5%">积分</th>
+                <th width="5%">账户余额</th>
+                <th width="5%">邀请收益</th>
+            </tr>
+            <tr>
+                <td>{{userCon.id}}</td>
+                <td>{{userCon.name}}</td>
+                <td>{{userCon.created_at | data}}</td>
+                <td>{{userCon.nickname}}</td>
+                <td>{{userCon.internal | internal}}</td>
+                <td>{{userCon.phone}}</td>
+                <td>{{userCon.gender | gender}}</td>
+                <td>黑名单</td>
+                <td>{{userCon.credit}}</td>
+                <td>{{userCon.wallet.balance }}</td>
+                <td>{{userCon.invite_gain}}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="commonIit">
+        <export-excel></export-excel>
+        收支明细</div>
+    <div ng-if="balanceListCon.length !=0">
+        <div class="tableCon">
+            <table class="tableMain" cellpadding="0" cellspacing="0" width="100%">
+                <tr>
+                    <th width="5%">来源</th>
+                    <th width="5%">时间</th>
+                    <th width="5%">金额</th>
+                </tr>
+                <tr ng-repeat="topicList in balanceListCon" repeat-done="">
+                    <td>{{topicList.payment_name}}</td>
+                    <td>{{topicList.created_at * 1000 | data2}}</td>
+                    <td>{{topicList.cash_flow | flow2}}{{topicList.amount}}</td>
+                </tr>
+            </table>
+        </div>
+        <page-con2></page-con2>
+    </div>
+    <div ng-if="balanceListCon.length == 0" style="text-align: center;">暂无收支动态变化</div>
+    <div class="commonIit">邀请用户列表</div>
+    <div ng-if="topicCon.length != 0">
+        <div class="tableCon">
+            <table class="tableMain" cellpadding="0" cellspacing="0" width="100%">
+                <tr>
+                    <th width="10%">被邀请人ID</th>
+                    <th width="10%">被邀请人名称</th>
+                    <th width="10%">被邀请人手机号</th>
+                    <!--<th width="10%">被邀请人所获收益</th>-->
+                    <th width="10%">真实姓名</th>
+                    <th width="10%">被邀请人注册时间</th>
+                </tr>
+                <tr ng-repeat="itemList in topicCon" repeat-done="">
+                    <td>{{itemList.invitee_id}}</td>
+                    <!--<td><a ui-sref="userData({id:itemList.invitee_id,code:topicList.invite})">{{itemList.invitee_nickname}}</a></td>-->
+                    <td>{{itemList.invitee_nickname}}</td>
+                    <td>{{itemList.invitee_phone}}</td>
+                    <td>{{itemList.profile.real_name}}</td>
+                    <td>{{itemList.created_at | data}}</td>
+                </tr>
+            </table>
+        </div>
+        <page-con></page-con>
+    </div>
+    <div ng-if="topicCon.length == 0" style="text-align: center;">暂无邀请用户</div>
+    <div class="commonIit">发布任务列表</div>
+    <div ng-if="publishTask.length != 0">
+        <div class="tableCon">
+            <table class="tableMain" cellpadding="0" cellspacing="0" width="100%">
+                <tr>
+                    <th width="5%">id</th>
+                    <th width="10%">任务名</th>
+                    <th width="15%">任务描述</th>
+                    <th width="5%">价格</th>
+                    <th width="5%">接单人</th>
+                    <th width="10%">手机号</th>
+                    <th width="5%">性别</th>
+                    <th width="5%">接单人id</th>
+                </tr>
+                <tr ng-repeat="topicList in publishTask" repeat-done="">
+                    <td>{{topicList.id}}</td>
+                    <td>{{topicList.name}}</td>
+                    <td>{{topicList.description || '无'}}</td>
+                    <td>{{topicList.price}}</td>
+                    <td>{{topicList.employee.nickname}}</td>
+                    <td>{{topicList.employee.phone}}</td>
+                    <td>{{topicList.employee.gender | gender}}</td>
+                    <td>{{topicList.employee.id}}</td>
+                </tr>
+            </table>
+        </div>
+        <page-con4></page-con4>
+    </div>
+    <div ng-if="publishTask.length == 0" style="text-align: center;">暂未发布过任务</div>
+    <div class="clear"></div>
+    <div class="commonIit">接受任务列表</div>
+    <div ng-if="acceptTask.length != 0">
+        <div class="tableCon">
+            <table class="tableMain" cellpadding="0" cellspacing="0" width="100%">
+                <tr>
+                    <th width="10%">ID</th>
+                    <th width="10%">任务名</th>
+                    <th width="10%">任务描述</th>
+                    <th width="10%">价格</th>
+                    <th width="10%">发单人</th>
+                    <th width="10%">手机号</th>
+                    <th width="10%">性别</th>
+                    <th width="10%">发单人ID</th>
+                </tr>
+                <tr ng-repeat="topicList in acceptTask" repeat-done="">
+                    <td>{{topicList.id}}</td>
+                    <td>{{topicList.name}}</td>
+                    <td>{{topicList.description || '无'}}</td>
+                    <td>{{topicList.price}}</td>
+                    <td>{{topicList.owner.nickname}}</td>
+                    <td>{{topicList.owner.phone}}</td>
+                    <td>{{topicList.owner.gender | gender}}</td>
+                    <td>{{topicList.owner.id}}</td>
+                </tr>
+            </table>
+        </div>
+        <page-con3></page-con3>
+    </div>
+    <div ng-if="acceptTask.length == 0" style="text-align: center;">暂未接受过任务</div>
+</article>

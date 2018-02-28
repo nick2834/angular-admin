@@ -1,0 +1,31 @@
+<nav class="breadcrumb ng-scope">
+    <i class="Hui-iconfont"></i> <a ui-sref="home">首页</a> <span class="c-gray en">>创建比赛
+    <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href='javascript:location.reload()' title="刷新">
+        <i class="Hui-iconfont"></i></a>
+</nav>
+<article class="page-container">
+    <div class="commonIit">创建比赛</div>
+    <div class="inputLine2">
+        <p>标题：</p><input type="text" name="tit">
+    </div>
+    <div class="inputLine2">
+        <p>队伍1：</p><input type="text" name="team1">
+    </div>
+    <div class="inputLine2">
+        <p>队伍2：</p><input type="text" name="team2">
+    </div>
+    <div class="inputLine2">
+        <p>比赛开始时间：</p><input type="datetime-local" name="gameBegin">
+    </div>
+    <div class="inputLine2">
+        <p>比赛结束时间：</p><input type="datetime-local" name="gameEnd">
+    </div>
+    <div class="inputLine2">
+        <p>投标开始时间：</p><input type="datetime-local" name="betBegin">
+    </div>
+    <div class="inputLine2">
+        <p>投标截止时间：</p><input type="datetime-local" name="betEnd">
+    </div>
+    <div class="clear"></div>
+    <button class="btn2" ng-click="createBet()">创建</button>
+</article>

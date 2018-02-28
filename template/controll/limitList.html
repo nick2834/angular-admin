@@ -1,0 +1,115 @@
+<style>
+    .row{
+        margin-bottom: 20px;
+    }
+</style>
+<nav class="breadcrumb ng-scope">
+    <i class="Hui-iconfont"></i> <a ui-sref="home">首页</a> <span class="c-gray en">>权限列表
+    <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href='javascript:location.reload()' title="刷新">
+    <i class="Hui-iconfont"></i></a>
+</nav>
+<article class="page-container">
+    <div class="text-c">
+        <form class="Huiform" method="post" action="" target="_self">
+            <input type="text" class="input-text" style="width:250px" placeholder="权限名称" id="a" name="">
+            <button type="submit" class="btn btn-success" id="b" name=""><i class="Hui-iconfont"></i> 搜权限节点</button>
+        </form>
+    </div>
+    <div class="cl pd-5 bg-1 bk-gray mt-20">
+        <span class="l" ng-if="editUser">
+            <!--<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont"></i> 批量删除</a>-->
+            <a href="javascript:;" ng-click="addLimit()" class="btn btn-primary radius"><i class="Hui-iconfont"></i> 添加权限节点</a>
+        </span>
+        <span class="r">共有数据：<strong>{{limitCon.length}}</strong> 条</span>
+    </div>
+    <div style="margin-top: 10px;">
+        <div class="tableCon">
+            <table class="table table-border table-bordered table-hover table-bg" cellpadding="0" cellspacing="0" width="100%">
+                <tr>
+                    <th scope="col" colspan="7">权限节点</th>
+                </tr>
+                <tr class="text-c">
+                    <th width="5%"><input type="checkbox" name="checkAll"></th>
+                    <th width="5%">id</th>
+                    <th width="30%">权限名称</th>
+                    <th width="40%">描述</th>
+                    <th width="20%">操作</th>
+                </tr>
+                <tr ng-repeat="x in limitCon | filter:id" repeat-done="" class="text-c">
+                    <td><input type="checkbox" name="id"></td>
+                    <td>{{x.id}}</td>
+                    <td>{{x.name}}</td>
+                    <td>{{x.description}}</td>
+                    <td ng-if="editUser">
+                        <a href="#/limitDetail/{{x.id}}">查看</a>
+                        <a ng-click="editLimit(x)" href="javascript:void(0);">修改</a>
+                        <a href="javascript:void(0);" ng-click="deleteL(x.id)">删除</a>
+                    </td>
+                    <td ng-if="!editUser">
+                        无此权限
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</article>
+<div id="addLimit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content radius">
+            <div class="modal-header">
+                <h3 class="modal-title">添加权限</h3>
+                <a class="close" data-dismiss="modal" aria-hidden="true" href="javascript:void(0);">×</a>
+            </div>
+            <div class="modal-body">
+                <div class="row cl">
+                    <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>权限名称：</label>
+                    <div class="formControls col-xs-8 col-sm-9">
+                        <input type="text" class="input-text ng-pristine ng-untouched ng-valid ng-not-empty" placeholder="请输入。。。" name="limitN" value="{{limit.name}}">
+                    </div>
+                </div>
+                <div class="row cl">
+                    <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>权限描述：</label>
+                    <div class="formControls col-xs-8 col-sm-9">
+                        <textarea class="input-text" placeholder="权限描述" name="limitDes">{{limit.description}}</textarea>
+                    </div>
+                </div>
+                <div class="row cl">
+                    <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+                        <button class="btn btn-primary createBtn" ng-click="createLimit()">创建</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="editLimit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content radius">
+            <div class="modal-header">
+                <h3 class="modal-title">修改角色</h3>
+                <a class="close" data-dismiss="modal" aria-hidden="true" href="javascript:void(0);">×</a>
+            </div>
+            <div class="modal-body">
+                <div class="row cl">
+                    <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>角色名字：</label>
+                    <div class="formControls col-xs-8 col-sm-9">
+                        <input type="text" class="input-text ng-pristine ng-untouched ng-valid ng-not-empty" placeholder="请输入。。。" name="limitNs" ng-model="limitUser.name">
+                    </div>
+                </div>
+                <div class="row cl">
+                    <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>角色描述：</label>
+                    <div class="formControls col-xs-8 col-sm-9">
+                        <textarea class="input-text" placeholder="角色描述" name="limitDess" ng-model="limitUser.description"></textarea>
+                    </div>
+                </div>
+                <div class="row cl">
+                    <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+                        <button class="btn btn-primary createBtn" ng-click="editLimits()">修改</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

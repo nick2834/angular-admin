@@ -1,0 +1,140 @@
+<style>
+	.row{margin-bottom: 20px}
+</style>
+<nav class="breadcrumb ng-scope">
+	<i class="Hui-iconfont"></i> <a ui-sref="home">首页</a> <span class="c-gray en">&gt;</span> {{title}} <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href='javascript:location.reload()' title="刷新">
+	<i class="Hui-iconfont"></i></a>
+</nav>
+<article class="page-container">
+	<div class="commonIit">用户搜索</div>
+	<!--<search-con></search-con>-->
+	<div class="searchLine">
+		<div class="addCon">
+			<button class="btn addIcon" ng-click="addInput(date)">按照注册时间搜索</button>
+		</div>
+		<input type="text" placeholder="请输入用户id" name="user_id" ng-model="user_id">
+		<input type="text" placeholder="请输入手机号" name="phone">
+		<input type="text" placeholder="请输入昵称" name="name">
+		<input type="text" placeholder="内部用户搜索" name="inner">
+		<button class="searchBrn" ng-click="search()">搜索</button>
+		<div class="clear"></div>
+	</div>
+	<div class="clear"></div>
+	<div class="commonIit">
+		<div ng-if="editUser">
+			<export-excel></export-excel>
+			<batch-operate></batch-operate>
+		</div>
+		用户列表
+	</div>
+	<div style="margin-top: 10px;">
+		<div>
+			<table class="tableMain" cellpadding="0" cellspacing="0" width="100%">
+				<thead>
+					<tr class="text-c">
+						<th width="5%"><input type="checkbox" name="" ng-model="selectAll" value="" ng-click="checkAll()"></th>
+						<th width="10%">id</th>
+						<th width="25%" ng-if="editUser">操作</th>
+						<th width="10%">昵称</th>
+						<th width="15%">手机号</th>
+						<th width="15%">注册时间</th>
+						<th width="15%">邀请码</th>
+						<th width="15%">内部用户</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="topicList in topicCon | filter:id" class="text-c">
+						<td><input type="checkbox" ng-model="topicList.select" value="" name=""></td>
+						<td>{{topicList.id}}</td>
+						<td ng-if="editUser">
+							<a href="javascript:void(0)" ui-sref="userData({id:topicList.id,code:topicList.invite})">查看</a>
+
+							<span ng-show="topicList.payment_locked" ng-click="unlock(topicList.id)">解锁</span>
+							<span ng-show="!topicList.payment_locked && topicList.payment_initialized " ng-click="binding(topicList.wallet_id)">重绑</span>
+							<span ng-show="!topicList.vip" ng-click="addMember(topicList.vip,topicList.id)">加V</span>
+							<span ng-show="topicList.vip" ng-click="addMember(topicList.vip,topicList.id)">解V</span>
+
+							<a ui-sref="withDrawRecords({id:topicList.id})">资金情况</a>
+							<a href="javascript:void(0)" ng-click="userEdit(topicList)">编辑</a>
+							<a href="javascript:void(0)" ng-if="topicList.internal == false" ng-click="addIntoUser(topicList.internal,topicList)">设置内部用户</a>
+							<a href="javascript:void(0)" ng-if="topicList.internal == true" ng-click="addIntoUser(topicList.internal,topicList)">取消内部用户</a>
+						</td>
+						<td>{{topicList.nickname}}</td>
+						<td>{{topicList.phone}}</td>
+						<td>{{topicList.created_at | data2}}</td>
+						<td>{{topicList.invite}}</td>
+						<td>{{topicList.internal | internal}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<page-con></page-con>
+	<div id="modal-demo" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content radius">
+				<form id="submitEdit">
+					<div class="modal-header">
+						<h5 class="modal-title" style="text-align: center">编辑{{userInfo.id}}的个人信息</h5>
+						<a class="close" data-dismiss="modal" aria-hidden="true" href="javascript:void(0);">×</a>
+					</div>
+					<div class="modal-body">
+						<div class="row cl">
+							<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>用户名：</label>
+							<div class="formControls col-xs-8 col-sm-9">
+								<input type="text" class="input-text" ng-model="userInfo.nickname" id="username" name="username">
+							</div>
+						</div>
+						<div class="row cl">
+							<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>性别：</label>
+							<div class="formControls col-xs-8 col-sm-9 skin-minimal">
+								<div class="radio-box">
+									<input name="sex" type="radio" id="sex-1" checked>
+									<label for="sex-1">男</label>
+								</div>
+								<div class="radio-box">
+									<input type="radio" id="sex-2" name="sex">
+									<label for="sex-2">女</label>
+								</div>
+								<div class="radio-box">
+									<input type="radio" id="sex-3" name="sex">
+									<label for="sex-3">保密</label>
+								</div>
+							</div>
+						</div>
+						<div class="row cl">
+							<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>手机：</label>
+							<div class="formControls col-xs-8 col-sm-9">
+								<input type="text" class="input-text" ng-model="userInfo.phone" id="mobile" name="mobile">
+							</div>
+						</div>
+						<div class="row cl">
+							<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>邮箱：</label>
+							<div class="formControls col-xs-8 col-sm-9">
+								<input type="text" class="input-text"  ng-model="userInfo.email" name="email" id="email">
+							</div>
+						</div>
+						<div class="row cl">
+							<label class="form-label col-xs-4 col-sm-3">内部用户选择：</label>
+							<div class="formControls col-xs-8 col-sm-9 skin-minimal">
+								<div class="radio-box">
+									<input name="internal" type="radio" id="yes" ng-model="userInfo.internal">
+									<label for="yes">是</label>
+								</div>
+								<div class="radio-box">
+									<input type="radio" id="no" name="internal" ng-model="userInfo.internal">
+									<label for="no">否</label>
+								</div>
+							</div>
+						</div>
+						<div class="row cl">
+							<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+								<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</article>

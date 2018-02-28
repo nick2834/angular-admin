@@ -1,0 +1,78 @@
+<style>
+    .tabBar span{width: 33.333333%;box-sizing: border-box;text-align: center}
+</style>
+<nav class="breadcrumb ng-scope">
+    <i class="Hui-iconfont"></i> <a ui-sref="home">首页</a> <span class="c-gray en">&gt;</span> 注册量统计 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href='javascript:location.reload()' title="刷新">
+    <i class="Hui-iconfont"></i></a>
+</nav>
+<article class="page-container">
+    <div class="commonIit">注册用户</div>
+    <div id="regUser"></div>
+    <div class="commonIit">每日注册详细</div>
+    <search-con2></search-con2>
+    <div class="clear"></div>
+
+    <div class="tableCon" id="tableScroll" style="overflow: hidden;">
+        <table class="tableMain" cellpadding="0" cellspacing="0" width="100%" >
+            <tr>
+                <th width="5%">注册时间</th>
+                <th width="5%">用户ID</th>
+                <th width="5%">手机号</th>
+            </tr>
+            <tr ng-repeat="topicList in userDeatail" repeat-done="">
+                <td>{{topicList.created_at | data}}</td>
+                <td><a ui-sref="userDatas({id:topicList.id})">{{topicList.id}}</a></td>
+                <td>{{topicList.phone}}</td>
+            </tr>
+        </table>
+    </div>
+    <page-con></page-con>
+    <div class="commonIit">每日注册统计
+        <search-con3></search-con3>
+    </div>
+    <div class="clear"></div>
+    <div class="searchLine">
+        <div id="tab_demo" class="HuiTab">
+            <div class="tabBar clearfix">
+                <span  ng-click="switchType('全部')" class="current">全部</span>
+                <span ng-click="switchType('速帮')">速帮</span>
+                <span ng-click="switchType('速溶')">速溶</span>
+            </div>
+        </div>
+    </div>
+    <div class="tableCon">
+        <table class="tableMain" cellpadding="0" cellspacing="0" width="100%" >
+            <tr>
+                <th width="5%">日期</th>
+                <th width="5%">每日注册用户</th>
+                <th width="5%">累计注册用户</th>
+            </tr>
+            <tr ng-repeat="userCon2 in userCons" repeat-done="" ng-show="all">
+                <td>{{userCon2.date}}</td>
+                <td>{{userCon2.number}}</td>
+                <td>{{totalU[$index].number}}</td>
+            </tr>
+            <tr ng-repeat="userCon2 in userCons" repeat-done="" ng-show="subang">
+                <td>{{userCon2.date}}</td>
+                <td>{{userCon2.suber_number}}</td>
+                <td>{{totalU[$index].suber_number}}</td>
+            </tr>
+            <tr ng-repeat="userCon2 in userCons" repeat-done="" ng-show="surong">
+                <td>{{userCon2.date}}</td>
+                <td>{{userCon2.surong_number}}</td>
+                <td>{{totalU[$index].surong_number}}</td>
+            </tr>
+        </table>
+    </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,67 @@
+<nav class="breadcrumb ng-scope">
+    <i class="Hui-iconfont"></i> <a ui-sref="home">首页</a> <span class="c-gray en">>站内信系统
+    <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href='javascript:location.reload()' title="刷新">
+        <i class="Hui-iconfont"></i></a>
+</nav>
+<article class="page-container">
+    <div class="container mail">
+        <div class="row">
+            <div class="col-md-12 col-lg-12 mail_content_r">
+                <p class="f-24">站内信发送：</p>
+                <form class="form form-horizontal" ng-submit="sendMsg()">
+                    <div class="row cl">
+                        <label class="form-label col-xs-4 col-sm-2">收件人：</label>
+                        <div class="formControls col-xs-9 col-sm-9 dropDown dropdown-toggle">
+                            <input type="text" class="input-text radius dropDown_A" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" name="uname" ng-model="msg.uname">
+                            <ul class="dropDown-menu menu radius box-shadow">
+                                <li><a href="javascript:void (0);">point</a></li>
+                                <li><a href="javascript:void (0);">point1</a></li>
+                                <li><a href="javascript:void (0);">point2</a></li>
+                                <li><a href="javascript:void (0);">point3</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row cl">
+                        <label class="form-label col-xs-4 col-sm-2">主题：</label>
+                        <div class="formControls col-xs-8 col-sm-9">
+                            <input type="text" class="input-text radius" placeholder="主题" id="mail_theme" name="mail_theme" ng-model="msg.mail_theme">
+                        </div>
+                    </div>
+                    <div class="row cl">
+                        <label class="form-label col-xs-4 col-sm-2">内容：</label>
+                        <div class="formControls col-xs-8 col-sm-9">
+                            <textarea name="msgContent" class="textarea radius" id="" cols="30" rows="10" ng-model="msg.msgContent"></textarea>
+                        </div>
+                    </div>
+                    <div class="row cl">
+                        <label class="form-label col-xs-4 col-sm-2"></label>
+                        <div class="formControls col-xs-8 col-sm-9">
+                            <button type="submit" class="btn btn-primary"><i class="Hui-iconfont Hui-iconfont-fabu">发送</i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</article>
+<script>
+    var flag = false
+    $('.recive_name').on('click',function () {
+        if (!flag){
+            $('.mail_content_r .recive_name').append('<span class="username"><input type="text" class="entry_input evt" name="uname" ng-model="msg.uname" ></span>')
+            flag = true;
+            return
+        }else{
+            return
+        }
+    })
+    $('.names li').on('click',function () {
+        $(this).addClass('actived').siblings().removeClass('actived')
+    })
+    $('.names li').dblclick(function () {
+        $('.mail_content_r .recive_name').append('<span class="username"><input type="text" class="entry_input evt" value="'+$(this).find('a').html()+'" name="uname" ng-model="msg.uname" ><span class="Hui-iconfont Hui-iconfont-close2 close_men"></span></span>')
+    })
+    $('.recive_name').on('click','.close_men',function () {
+        $(this).parent('.username').remove()
+    })
+</script>

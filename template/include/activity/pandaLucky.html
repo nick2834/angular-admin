@@ -1,0 +1,60 @@
+<nav class="breadcrumb ng-scope">
+    <i class="Hui-iconfont"></i> <a ui-sref="home">首页</a> <span class="c-gray en">>活动数据详情<span class="c-gray en">>星座联萌数据统计
+    <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href='javascript:location.reload()'
+       title="刷新">
+    <i class="Hui-iconfont"></i></a>
+</nav>
+<article class="page-container">
+    <div class="commonIit">星座联萌*开心转转转</div>
+    <search-con2></search-con2>
+    <div class="tableCon" id="tableScroll" style="overflow: hidden;">
+        <table class="tableMain" cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+                <th width="5%">日期</th>
+                <th width="5%">今日抽奖总数</th>
+                <th width="5%">今日抽奖人数</th>
+                <th width="5%">今日获得钻石数量</th>
+                <th width="5%">今日获得玫瑰数量</th>
+                <th width="5%">今日获得积分数</th>
+                <th width="5%">今日获得现金金额</th>
+                <th width="5%">今日投注总金额</th>
+                <th width="5%" style="background: #e2a802">获得钻石数</th>
+                <th width="5%" style="background: #e2a802">获得玫瑰数</th>
+                <th width="5%" style="background: #e2a802">获得SC*5</th>
+            </tr>
+            <tr ng-repeat="topicList in astro" repeat-done="">
+                <td>{{ topicList.date }}</td>
+                <td>{{ topicList.number }}</td>
+                <td>{{ join_users[$index].number }}</td>
+                <td>{{ diamond[$index].number }}</td>
+                <td>{{ rose[$index].number }}</td>
+                <td>{{ point[$index].number }}</td>
+                <td>{{ cash[$index].price }}</td>
+                <td>{{ betts[$index].price }}</td>
+                <td>{{ slot_diamond[$index].number }}</td>
+                <td>{{ slot_rose[$index].number }}</td>
+                <td>{{ slot_sc[$index].number }}</td>
+            </tr>
+        </table>
+    </div>
+    <page-con></page-con>
+    <div class="commonIit">当天抽奖数量</div>
+    <search-con3></search-con3>
+    <div class="tableCon" id="tableScroll2" style="overflow: hidden;">
+        <table class="tableMain" cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+                <th width="5%">日期</th>
+                <th width="5%">抽奖人ID</th>
+                <th width="5%">昵称</th>
+                <th width="5%">获得奖品</th>
+            </tr>
+            <tr ng-repeat="topicList in prizes" repeat-done="">
+                <td>{{ topicList.created_at | data2 }}</td>
+                <td>{{ topicList.id }}</td>
+                <td>{{ topicList.username }}</td>
+                <td>{{ topicList.prize }}</td>
+            </tr>
+        </table>
+    </div>
+    <page-con2></page-con2>
+</article>

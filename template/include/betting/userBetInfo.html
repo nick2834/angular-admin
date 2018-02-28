@@ -1,0 +1,60 @@
+<nav class="breadcrumb ng-scope">
+    <i class="Hui-iconfont"></i> <a ui-sref="home">首页</a> <span class="c-gray en">></span><a ui-sref="bettingList">竞猜列表</a><span class="c-gray en">></span>用户竞猜列表
+    <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href='javascript:location.reload()' title="刷新">
+        <i class="Hui-iconfont"></i></a>
+</nav>
+<article class="page-container">
+    <div class="commonIit">用户基本信息</div>
+    <div class="tableCon">
+        <table class="tableMain" cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+                <th width="5%">id</th>
+                <th width="10%">昵称</th>
+                <th width="5%">性别</th>
+                <th width="5%">年龄</th>
+                <th width="15%">等级</th>
+                <!--<th width="10%">排名</th>-->
+            </tr>
+            <tr>
+                <td><a ui-sref="userDatas({id:userCon.id})">{{userCon.id}}</a></td>
+                <td>{{userCon.nickname}}</td>
+                <td>{{userCon.gender | gender}}</td>
+                <td>{{userCon.age}}</td> 
+                <td>{{userCon.level}}</td>
+                <!--<td>{{userCon.rank}}</td>-->
+            </tr>
+        </table>
+    </div>
+    <div class="commonIit">投注历史列表</div>
+    <div class="tableCon">
+        <table class="tableMain" cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+                <th width="5%">id</th>
+                <th width="15%">时间</th>
+                <th width="10%">比赛名</th>
+                <th width="5%">A队</th>
+                <th width="5%">比分</th>
+                <th width="5%">B队</th>
+                <th width="5%">投注队伍</th>
+                <th width="5%">投注金额</th>
+                <th width="5%">收益</th>
+            </tr>
+            <tr ng-repeat="topicList in publishTask" repeat-done="">
+                <td>{{topicList.id}}</td>
+                <td>{{topicList.created_at}}</td>
+                <td>{{topicList.match.name}}</td>
+                <td>{{topicList.match.group_a}}</td>
+                <td>{{topicList.match.match_result}}</td>
+                <td>{{topicList.match.group_b}}</td>
+                <td>{{topicList.target}}</td>
+                <td>{{topicList.amount}}</td>
+                <td>{{topicList.gain}}</td>
+                <!--<td>{{topicList.employee.gender | gender}}</td>-->
+                <!--<td>{{topicList.employee.id}}</td>-->
+            </tr>
+        </table>
+    </div>
+    <page-con></page-con>
+    
+   
+</article>

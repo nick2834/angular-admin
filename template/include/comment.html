@@ -1,0 +1,57 @@
+<style>
+    .searchLine input{
+        margin-bottom: 10px;
+    }
+</style>
+<nav class="breadcrumb ng-scope">
+    <i class="Hui-iconfont"></i> <a ui-sref="home">首页</a> <span class="c-gray en">>评论管理
+    <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href='javascript:location.reload()' title="刷新">
+    <i class="Hui-iconfont"></i></a>
+</nav>
+<article class="page-container">
+    <div class="commonIit">评论查询</div>
+    <div class="searchLine">
+        <input type="date" placeholder="开始时间" name="bgnT" class="marginI">
+        <input type="date" placeholder="结束时间" name="endT">
+        <input type="text" name="content" placeholder="请填入评论内容">
+        <input type="text" name="topic_id" placeholder="请填入话题ID">
+        <input type="text" name="task_id" placeholder="请填入评论ID">
+        <input type="text" name="from_user_id" placeholder="请填入评论人ID">
+        <input type="text" name="reply_id" placeholder="请填入被回复id">
+        <button class="searchBrn" ng-click="search()">搜索</button>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div style="margin-top: 10px;">
+        <div class="commonIit">评论列表</div>
+        <div class="tableCon">
+            <table class="tableMain" cellpadding="0" cellspacing="0" width="100%">
+                <tr>
+                    <!--<th width="5%"><input type="checkbox" name="checkAll"></th>-->
+                    <th width="10%">评论id</th>
+                    <th width="10%">评论人id</th>
+                    <th width="10%">被评论人id</th>
+                    <th width="20%">评论内容</th>
+                    <th width="15%">时间</th>
+                    <th width="10%">话题id</th>
+                    <th width="10%">回复id</th>
+                    <th width="10%">任务id</th>
+                    <th width="10%">操作</th>
+                </tr>
+                <tr ng-repeat="topicList in topicCon" repeat-done="">
+                    <!--<td><input type="checkbox" name="id"></td>-->
+                    <td>{{topicList.id}}</td>
+                    <td>{{topicList.from_user_id}}</td>
+                    <td>{{topicList.to_user_id}}</td>
+                    <td>{{topicList.content}}</td>
+                    <td>{{topicList.created_at | data}}</td>
+                    <td>{{topicList.topic_id}}</td>
+                    <td>{{topicList.reply_id}}</td>
+                    <td>{{topicList.task_id}}</td>
+                    <td><a href="javascript:;" ng-click="deleteComment(topicList.from_user_id,topicList.id,topicList.topic_id)">删除</a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <page-con></page-con>
+</article>

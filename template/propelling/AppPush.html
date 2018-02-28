@@ -1,0 +1,96 @@
+<style>
+    #selectTypeId{display: none;}
+    #selectTypeId input{margin-bottom: 10px}
+</style>
+<nav class="breadcrumb ng-scope">
+    <i class="Hui-iconfont"></i> <a ui-sref="home">首页</a> <span class="c-gray en">&gt;</span> APP消息推送 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href='javascript:location.reload()' title="刷新">
+    <i class="Hui-iconfont"></i></a>
+</nav>
+<article class="page-container">
+    <div class="switchTit tabBar">
+        <span class="current">精确推送</span>
+        <span>属性推送</span>
+        <span>全部推送</span>
+    </div>
+
+    <div class="switchCon">
+        <input class="tit3 tit2" type="text" placeholder="手机号" name="phone" />
+        <input class="tit3 tit2" type="text" placeholder="用户ID" name="uid" />
+        <p class="prompt"><strong>提示：</strong>两个条件只能填写一个</p>
+        <button type="submit" class="btn2" name="filter">筛选</button>
+
+        <div class="conM" ng-if=" topicCon.length != 0">
+            <div class="tit">筛选列表</div>
+            <div class="tableCon">
+                <table class="tableMain" cellpadding="0" cellspacing="0" width="100%">
+                    <tr>
+                        <th width="5%"><input type="checkbox" name="checkAll"></th>
+                        <th width="5%">id</th>
+                        <th width="20%">nickname</th>
+                        <th width="20%">phone</th>
+                        <th width="20%">gender</th>
+                        <th width="30%">school</th>
+                    </tr>
+                    <tr ng-repeat="topicList in topicCon" repeat-done="">
+                        <td><input type="checkbox" name="id" title="{{topicList.id}}"></td>
+                        <td>{{topicList.id}}</td>
+                        <td>{{topicList.nickname}}</td>
+                        <td>{{topicList.phone}}</td>
+                        <td>{{topicList.gender}}</td>
+                        <td>{{topicList.school || '无'}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="pushText">
+            <textarea placeholder="请填写推送信息" name="content"></textarea>
+            <div class="limitText">您还可以输入20个字</div>
+        </div>
+        <button type="submit" class="btn2" name="push">推送</button>
+    </div>
+    <div class="switchCon" style="display: none;">
+        <div class="selectLine">
+            <p>学校：</p>
+            <input type="text" class="pushI" name="school">
+            <div class="schoolList">
+                <ul>
+                    <li ng-repeat="x in schollCon" repeat-done="getinfo()">{{x.name}}</li>
+                </ul>
+                <div ng-if="!schollCon.length" class="schoolNone">没有搜索结果</div>
+            </div>
+        </div>
+        <div class="selectLine">
+            <p>性别：</p>
+            <form>
+                <label class="selectL"><input type="radio" name="gender" title="male">男</label>
+                <label class="selectL"><input type="radio" name="gender" title="female">女</label>
+            </form>
+        </div>
+        <div class="pushText">
+            <textarea placeholder="请填写推送信息" name="content"></textarea>
+            <div class="limitText">您还可以输入20个字</div>
+        </div>
+        <button type="submit" class="btn2" name="push">推送</button>
+    </div>
+    <div class="switchCon" style="display: none;">
+        <div class="selectLine">
+            <p>类型：</p>
+            <select id="getType" ng-model="selectValue" class='pushI' style="height: 36px" ng-change="selectedChange(selectValue)">
+                <option value="" style="color: #c2c2c2;">---请选择通知类型---</option>
+                <option value="activity">活动</option>
+                <option value="task">任务</option>
+                <option value="system">系统通知</option>
+                <option value="update">更新</option>
+                <option value="topic">话题</option>
+            </select>
+        </div>
+        <div class="selectLine" >
+            <input id="selectTypeId" class="tit3 tit2" type="text" placeholder="活动ID（必填）" name="target_id" />
+        </div>
+        <div class="pushText">
+            <textarea placeholder="请填写推送信息" name="contentAll"></textarea>
+            <div class="limitText">您还可以输入20个字</div>
+        </div>
+        <button type="submit" class="btn2" name="push2">全部推送</button>
+    </div>
+</article>
