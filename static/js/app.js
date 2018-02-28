@@ -2,14 +2,11 @@ var suber = angular.module('admin', ["ui.router"]);
 
 suber.run(['$rootScope',function($rootScope,$location){
     ////测试环境路径
-    $rootScope.baseUrl = 'https://test.suber360.com';
-    $rootScope.baseUrl2 = 'https://admin.suber360.com';
-    $rootScope.baseImgUrl ="https://devcdn.suber360.com";
+    $rootScope.baseUrl = '';
+    $rootScope.baseUrl2 = '';
+    $rootScope.baseImgUrl ="";
     $rootScope.aid = '87'
     //生产环境路径
-    //  $rootScope.baseUrl = 'https://www.suber360.com';
-    //  $rootScope.baseUrl2 = 'https://admin.suber360.com';
-    //  $rootScope.baseImgUrl ="https://static.suber360.com/@";
     //  $rootScope.aid = '58'
      $rootScope.addInput = function(date){
         if($(".conditionLine").length !=0 ){
